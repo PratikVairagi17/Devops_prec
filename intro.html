@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Complete Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #0366d6;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #0366d6;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+        
+        h2 {
+            color: #0366d6;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-left: 4px solid #0366d6;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #24292e;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .key-points {
+            background-color: #f6f8fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .key-points li {
+            margin-bottom: 8px;
+            list-style-position: inside;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th {
+            background-color: #0366d6;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .workflow-box {
+            background-color: #e7f3ff;
+            border: 2px solid #0366d6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .qa-section {
+            background-color: #f0f7ff;
+            border-left: 4px solid #0366d6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .qa-section strong {
+            color: #0366d6;
+        }
+        
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .comparison-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .comparison-item h4 {
+            color: #0366d6;
+            margin-bottom: 10px;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin-bottom: 40px;
+        }
+        
+        .toc {
+            background-color: #f6f8fa;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+        }
+        
+        .toc ol {
+            margin-left: 20px;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        @media print {
+            .container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🧠 Git & GitHub</h1>
+            <p>Complete Study Guide for Learning & Interviews</p>
+        </div>
+        
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>📋 Table of Contents</h3>
+            <ol>
+                <li>What is Git?</li>
+                <li>What is GitHub?</li>
+                <li>Basic Git Workflow</li>
+                <li>Common Git Commands</li>
+                <li>Branching in Git</li>
+                <li>Git Merge - Detailed Explanation</li>
+                <li>Git Reset - Detailed Explanation</li>
+                <li>Git Rebase - Detailed Explanation</li>
+                <li>Merge vs Rebase vs Reset - Complete Comparison</li>
+                <li>Git Delete Operations</li>
+                <li>Real-Life GitHub Flow</li>
+                <li>Interview Questions & Answers</li>
+                <li>Quick Reference Table</li>
+            </ol>
+        </div>
+        
+        <!-- Section 1 -->
+        <div class="section">
+            <h2>1. What is Git?</h2>
+            <p>Git is a Distributed Version Control System (DVCS) that helps developers track changes in code, collaborate with others, and revert to previous versions easily. Every developer has a complete copy of the project history on their local machine.</p>
+            
+            <h3>Key Features:</h3>
+            <ul class="key-points">
+                <li><strong>Tracks changes</strong> in source code with detailed history</li>
+                <li><strong>Enables teamwork</strong> via branches and merging</li>
+                <li><strong>Distributed</strong> - every user has a full copy of the project</li>
+                <li><strong>Offline capability</strong> - works without internet, syncs when online</li>
+                <li><strong>Commit history</strong> - every version can be rolled back or compared</li>
+            </ul>
+        </div>
+        
+        <!-- Section 2 -->
+        <div class="section">
+            <h2>2. What is GitHub?</h2>
+            <p>GitHub is a cloud-based hosting platform for Git repositories. It helps you store, share, and collaborate on Git projects online with teams around the world.</p>
+            
+            <h3>Key Features:</h3>
+            <ul class="key-points">
+                <li><strong>Remote repository hosting</strong> - store projects in the cloud</li>
+                <li><strong>Collaboration</strong> via Pull Requests (PRs) and code reviews</li>
+                <li><strong>Access control</strong> - manage who can view/edit code</li>
+                <li><strong>CI/CD integration</strong> - automated testing and deployment</li>
+                <li><strong>Integration with tools</strong> - VS Code, Docker, Jenkins, etc.</li>
+            </ul>
+            
+            <div class="workflow-box">
+                <strong>💡 Think of it like:</strong><br>
+                • <strong>Git</strong> = Local tool for version control on your machine<br>
+                • <strong>GitHub</strong> = Online home for your Git projects (remote storage)
+            </div>
+        </div>
+        
+        <!-- Section 3 -->
+        <div class="section">
+            <h2>3. Basic Git Workflow</h2>
+            <p>Git has four stages where code moves through before being shared with the team:</p>
+            
+            <div class="code-block">
+Working Directory → Staging Area → Local Repository → Remote Repository (GitHub)
+            </div>
+            
+            <table>
+                <tr>
+                    <th>Stage</th>
+                    <th>Description</th>
+                    <th>Command</th>
+                </tr>
+                <tr>
+                    <td><strong>Working Directory</strong></td>
+                    <td>Where you modify files on your machine</td>
+                    <td>Edit files directly</td>
+                </tr>
+                <tr>
+                    <td><strong>Staging Area</strong></td>
+                    <td>Files marked and ready to be committed</td>
+                    <td><code>git add</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Local Repository</strong></td>
+                    <td>Commits stored on your system</td>
+                    <td><code>git commit</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Remote Repository</strong></td>
+                    <td>Shared repository on GitHub</td>
+                    <td><code>git push</code></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Section 4 -->
+        <div class="section">
+            <h2>4. Common Git Commands</h2>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>git init</code></td>
+                    <td>Initialize a new repository</td>
+                    <td><code>git init my-project</code></td>
+                </tr>
+                <tr>
+                    <td><code>git clone &lt;url&gt;</code></td>
+                    <td>Clone a remote repository</td>
+                    <td><code>git clone https://github.com/user/repo.git</code></td>
+                </tr>
+                <tr>
+                    <td><code>git status</code></td>
+                    <td>Show current changes and status</td>
+                    <td><code>git status</code></td>
+                </tr>
+                <tr>
+                    <td><code>git add &lt;file&gt;</code></td>
+                    <td>Stage specific file for commit</td>
+                    <td><code>git add main.py</code></td>
+                </tr>
+                <tr>
+                    <td><code>git add .</code></td>
+                    <td>Stage all modified files</td>
+                    <td><code>git add .</code></td>
+                </tr>
+                <tr>
+                    <td><code>git commit -m "message"</code></td>
+                    <td>Save snapshot with message</td>
+                    <td><code>git commit -m "Fixed login bug"</code></td>
+                </tr>
+                <tr>
+                    <td><code>git push origin &lt;branch&gt;</code></td>
+                    <td>Upload to GitHub</td>
+                    <td><code>git push origin main</code></td>
+                </tr>
+                <tr>
+                    <td><code>git pull origin &lt;branch&gt;</code></td>
+                    <td>Fetch and merge from GitHub</td>
+                    <td><code>git pull origin main</code></td>
+                </tr>
+                <tr>
+                    <td><code>git log</code></td>
+                    <td>Show commit history</td>
+                    <td><code>git log --oneline</code></td>
+                </tr>
+                <tr>
+                    <td><code>git diff</code></td>
+                    <td>Show changes between commits</td>
+                    <td><code>git diff HEAD~1</code></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Section 5 -->
+        <div class="section">
+            <h2>5. Branching in Git</h2>
+            <p>A branch is a separate line of development used for adding new features or fixing bugs without disturbing the main code. Branches allow multiple developers to work independently.</p>
+            
+            <h3>Branch Commands:</h3>
+            <div class="code-block">
+git branch feature1          # Create a new branch
+git checkout feature1        # Switch to that branch
+git checkout -b bugfix       # Create & switch in one command
+git branch                   # List all branches
+git branch -a                # List all branches (local & remote)
+git merge feature1           # Merge feature1 into current branch
+git branch -d feature1       # Delete the branch
+            </div>
+            
+            <h3>Typical Branch Workflow:</h3>
+            <ol class="key-points">
+                <li>Create a new branch for your feature</li>
+                <li>Switch to that branch</li>
+                <li>Make changes and commit</li>
+                <li>Push branch to GitHub</li>
+                <li>Create Pull Request for review</li>
+                <li>Merge after approval</li>
+                <li>Delete the branch</li>
+            </ol>
+        </div>
+        
+        <!-- Section 6 -->
+        <div class="section">
+            <h2>6. Git Merge - Detailed Explanation</h2>
+            <p>Merging combines changes from one branch into another. It preserves all commit history and is the standard way to integrate features in Git.</p>
+            
+            <h3>Basic Merge Process:</h3>
+            <div class="code-block">
+git checkout main          # Switch to main branch
+git merge feature1         # Merge feature1 into main
+            </div>
+            
+            <h3>Types of Merges:</h3>
+            
+            <h4>1. Fast-Forward Merge</h4>
+            <p>Occurs when the main branch hasn't changed since the feature branch was created. Git simply moves the branch pointer forward.</p>
+            <div class="code-block">
+Before: main → A → B
+        feature1 → B
+
+After:  main → A → B (pointer moved forward)
+            </div>
+            
+            <h4>2. Three-Way Merge</h4>
+            <p>Occurs when both branches have new commits. Git combines changes and creates a new "merge commit".</p>
+            <div class="code-block">
+Before: main → A → B → D
+        feature1 → A → C
+
+After:  main → A → B → D → M (merge commit)
+                    └→ C ─┘
+            </div>
+            
+            <h3>Merge Conflicts:</h3>
+            <div class="warning">
+                <strong>⚠️ Conflict Situation:</strong> Occurs when both branches modified the same lines in a file. Git cannot automatically decide which change to keep.
+            </div>
+            
+            <h4>Resolving Conflicts:</h4>
+            <div class="code-block">
+# 1. Git marks conflicts with:
+<<<<<<< HEAD
+your changes
+=======
+their changes
+>>>>>>> branch-name
+
+# 2. Manually edit the file to keep desired code
+
+# 3. Stage and commit
+git add &lt;file&gt;
+git commit -m "Resolved merge conflict"
+            </div>
+        </div>
+        
+        <!-- Section 7 -->
+        <div class="section">
+            <h2>7. Git Reset - Detailed Explanation</h2>
+            <p>Git reset is used to undo commits or unstage files by moving the HEAD pointer to a specific previous commit. It can be dangerous if used incorrectly.</p>
+            
+            <h3>Types of Reset:</h3>
+            <table>
+                <tr>
+                    <th>Reset Type</th>
+                    <th>Keeps Changes?</th>
+                    <th>Keeps Staged?</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><code>--soft</code></td>
+                    <td>✅ Yes</td>
+                    <td>✅ Yes</td>
+                    <td>Undo commit but keep changes staged</td>
+                </tr>
+                <tr>
+                    <td><code>--mixed</code> (default)</td>
+                    <td>✅ Yes</td>
+                    <td>❌ No</td>
+                    <td>Unstage changes but keep files modified</td>
+                </tr>
+                <tr>
+                    <td><code>--hard</code></td>
+                    <td>❌ No</td>
+                    <td>❌ No</td>
+                    <td>Completely remove commits and changes</td>
+                </tr>
+            </table>
+            
+            <h4>Soft Reset Example:</h4>
+            <div class="code-block">
+git reset --soft HEAD~1
+            </div>
+            <p>✅ Removes the last commit but keeps your changes staged, so you can recommit with a different message.</p>
+            
+            <h4>Mixed Reset Example:</h4>
+            <div class="code-block">
+git reset --mixed HEAD~1
+            </div>
+            <p>✅ Removes the last commit and unstages changes, but files remain modified. You'll need to <code>git add</code> again.</p>
+            
+            <h4>Hard Reset Example:</h4>
+            <div class="code-block">
+git reset --hard HEAD~1
+            </div>
+            <p>❌ Completely removes the last commit and all changes. This is dangerous and hard to undo!</p>
+            
+            <div class="warning">
+                <strong>⚠️ Warning:</strong> <code>git reset --hard</code> deletes data. Use it only when you're absolutely sure. Consider using <code>git revert</code> as a safer alternative for shared repositories.
+            </div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- Section 8 -->
+        <div class="section">
+            <h2>8. Merge vs Reset - Key Differences</h2>
+            <p>These are two fundamental Git operations that serve different purposes and have different implications for your repository.</p>
+            
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th><code>git merge</code></th>
+                    <th><code>git reset</code></th>
+                </tr>
+                <tr>
+                    <td><strong>Purpose</strong></td>
+                    <td>Combine two branches together</td>
+                    <td>Undo commits or move HEAD pointer</td>
+                </tr>
+                <tr>
+                    <td><strong>Effect</strong></td>
+                    <td>Creates new commit (merge commit)</td>
+                    <td>Moves HEAD to previous commit</td>
+                </tr>
+                <tr>
+                    <td><strong>History</strong></td>
+                    <td>Preserved completely</td>
+                    <td>Rewritten (danger of losing commits)</td>
+                </tr>
+                <tr>
+                    <td><strong>Collaboration</strong></td>
+                    <td>Safe for shared branches</td>
+                    <td>Should only be used locally</td>
+                </tr>
+                <tr>
+                    <td><strong>Risk Level</strong></td>
+                    <td>Low - no data loss</td>
+                    <td>High (especially <code>--hard</code>)</td>
+                </tr>
+                <tr>
+                    <td><strong>Typical Usage</strong></td>
+                    <td>Integrating new features into main</td>
+                    <td>Undoing mistakes before pushing</td>
+                </tr>
+            </table>
+            
+            <h3>When to Use MERGE:</h3>
+            <ul class="key-points">
+                <li>You want to combine work from another branch into current branch</li>
+                <li>Working in a collaborative/team environment</li>
+                <li>Merging feature branch into main/production</li>
+                <li>You need complete audit trail of all changes</li>
+                <li>Safe option - preserves all history</li>
+            </ul>
+            
+            <h3>When to Use RESET:</h3>
+            <ul class="key-points">
+                <li>You want to undo local commits that haven't been pushed</li>
+                <li>You need to move HEAD to a previous commit</li>
+                <li>You're working alone and want to clean up history</li>
+                <li>You made a mistake and want to go back</li>
+                <li>Should NOT use on commits already pushed to shared repo</li>
+            </ul>
+            
+            <h3>Real-World Scenario:</h3>
+            <div class="workflow-box">
+                <strong>Scenario 1: Feature Integration</strong><br>
+                You've completed work on feature-branch and want to add it to main.<br>
+                ➜ <strong>Use MERGE</strong> - combines branches safely<br><br>
+                <strong>Scenario 2: Undo Local Mistake</strong><br>
+                You committed wrong code locally but haven't pushed yet.<br>
+                ➜ <strong>Use RESET</strong> - undo local commits safely<br><br>
+                <strong>Scenario 3: Already Pushed to Shared Repo</strong><br>
+                You pushed wrong code to GitHub and team sees it.<br>
+                ➜ <strong>Use REVERT</strong> - creates new commit that undoes changes (safer than reset)
+            </div>
+        </div>
+        
+        <!-- Section 9 -->
+        <div class="section">
+            <h2>9. Git Rebase - Detailed Explanation</h2>
+            <p>Rebase is an alternative to merge that rewrites commit history to create a linear sequence of commits. It "replays" commits from one branch onto another branch.</p>
+            
+            <h3>What is Rebase?</h3>
+            <p>Rebase takes commits from one branch and applies them on top of another branch, creating a cleaner, linear history compared to merge which creates a branching history.</p>
+            
+            <h3>Basic Rebase Syntax:</h3>
+            <div class="code-block">
+git rebase &lt;branch-name&gt;
+            </div>
+            
+            <h3>Visual Comparison: Merge vs Rebase</h3>
+            
+            <h4>Before (Both branches have new commits):</h4>
+            <div class="code-block">
+main:    A -- B -- D
+         /
+feature: A -- C
+            </div>
+            
+            <h4>After Using MERGE:</h4>
+            <div class="code-block">
+main:    A -- B -- D -- M (merge commit)
+         /          /
+feature: A -- C ---
+            </div>
+            <p>Result: Non-linear history with merge commit</p>
+            
+            <h4>After Using REBASE:</h4>
+            <div class="code-block">
+main:    A -- B -- D
+         
+feature: A -- B -- D -- C'
+            </div>
+            <p>Result: Linear history, commits replayed cleanly</p>
+            
+            <h3>Rebase Workflow Example:</h3>
+            <div class="code-block">
+# 1. Switch to feature branch
+git checkout feature-branch
+
+# 2. Rebase onto main
+git rebase main
+
+# 3. Resolve any conflicts if they occur
+# Edit conflicting files, then:
+git add .
+git rebase --continue
+
+# 4. Switch back to main
+git checkout main
+
+# 5. Fast-forward merge (now just moves pointer)
+git merge feature-branch
+            </div>
+            
+            <h3>Types of Rebase:</h3>
+            
+            <h4>1. Simple Rebase (Linear History)</h4>
+            <div class="code-block">
+git rebase main
+            </div>
+            <p>Replays all commits from feature branch on top of main branch.</p>
+            
+            <h4>2. Interactive Rebase (Edit commits)</h4>
+            <div class="code-block">
+git rebase -i HEAD~3
+            </div>
+            <p>Edit last 3 commits: squash, reorder, edit messages, or delete commits.</p>
+            
+            <h4>3. Interactive Rebase Options:</h4>
+            <ul class="key-points">
+                <li><strong>pick</strong> = Use commit as is</li>
+                <li><strong>reword</strong> = Use commit but edit message</li>
+                <li><strong>squash</strong> = Combine with previous commit</li>
+                <li><strong>fixup</strong> = Combine and discard message</li>
+                <li><strong>drop</strong> = Remove commit entirely</li>
+            </ul>
+            
+            <h3>Rebase Conflicts:</h3>
+            <p>Similar to merge, rebase can have conflicts. Resolve the same way:</p>
+            <div class="code-block">
+# 1. Git stops at conflicting commit
+# 2. Edit files and resolve conflicts
+
+# 3. Stage resolved files
+git add .
+
+# 4. Continue rebase
+git rebase --continue
+
+# 5. Or abort if you want to cancel
+git rebase --abort
+            </div>
+            
+            <div class="warning">
+                <strong>⚠️ Important Rules About Rebase:</strong><br>
+                • <strong>NEVER rebase public/shared commits</strong> - use only on local branches<br>
+                • <strong>NEVER rebase commits already pushed to GitHub</strong><br>
+                • <strong>Use merge for shared branches</strong> (main, develop)<br>
+                • <strong>Use rebase for local feature branches</strong> before pushing<br>
+                • Rebase rewrites history - dangerous on shared repos!
+            </div>
+        </div>
+        
+        <!-- Section 10 -->
+        <div class="section">
+            <h2>10. Merge vs Rebase vs Reset - Complete Comparison</h2>
+            
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th><code>git merge</code></th>
+                    <th><code>git rebase</code></th>
+                    <th><code>git reset</code></th>
+                </tr>
+                <tr>
+                    <td><strong>Purpose</strong></td>
+                    <td>Combine two branches</td>
+                    <td>Rewrite history linearly</td>
+                    <td>Undo commits</td>
+                </tr>
+                <tr>
+                    <td><strong>Creates Commit?</strong></td>
+                    <td>Yes (merge commit)</td>
+                    <td>No (replays commits)</td>
+                    <td>No (moves HEAD)</td>
+                </tr>
+                <tr>
+                    <td><strong>History</strong></td>
+                    <td>Non-linear but complete</td>
+                    <td>Linear and clean</td>
+                    <td>Rewritten/deleted</td>
+                </tr>
+                <tr>
+                    <td><strong>For Shared Repos?</strong></td>
+                    <td>✅ Safe & Recommended</td>
+                    <td>❌ Never on public commits</td>
+                    <td>❌ Local only</td>
+                </tr>
+                <tr>
+                    <td><strong>Conflicts</strong></td>
+                    <td>Resolved once per merge</td>
+                    <td>May resolve multiple times</td>
+                    <td>No conflicts</td>
+                </tr>
+                <tr>
+                    <td><strong>Typical Use</strong></td>
+                    <td>Merge feature to main</td>
+                    <td>Clean up feature branch history</td>
+                    <td>Undo local mistakes</td>
+                </tr>
+                <tr>
+                    <td><strong>Skill Level</strong></td>
+                    <td>Beginner</td>
+                    <td>Intermediate/Advanced</td>
+                    <td>Intermediate</td>
+                </tr>
+            </table>
+            
+            <h3>Decision Tree: Which One to Use?</h3>
+            
+            <div class="workflow-box">
+                <strong>🔹 Question 1: Are commits already pushed to GitHub?</strong><br>
+                → YES: Use MERGE or don't change anything<br>
+                → NO: Can use any option<br><br>
+                
+                <strong>🔹 Question 2: Is this a shared/public branch (main, develop)?</strong><br>
+                → YES: Use MERGE only<br>
+                → NO: Can use rebase or merge<br><br>
+                
+                <strong>🔹 Question 3: Do you want to combine branches?</strong><br>
+                → YES: Use MERGE or REBASE<br>
+                → NO: Use RESET (to undo)<br><br>
+                
+                <strong>🔹 Question 4: Do you want clean linear history?</strong><br>
+                → YES: Use REBASE (on local branches only)<br>
+                → NO: Use MERGE (safer, preserves context)
+            </div>
+            
+            <h3>Practical Scenarios:</h3>
+            
+            <div class="qa-section">
+                <strong>Scenario 1: Local Feature Branch Before Pushing</strong><br>
+                You've made 5 commits on feature-branch, want clean history before PR<br>
+                → <strong>Use REBASE:</strong> <code>git rebase main</code> (cleans up history)
+            </div>
+            
+            <div class="qa-section">
+                <strong>Scenario 2: Merging Feature to Main</strong><br>
+                Feature is ready, need to integrate into main branch<br>
+                → <strong>Use MERGE:</strong> <code>git merge feature-branch</code> (safe for shared)
+            </div>
+            
+            <div class="qa-section">
+                <strong>Scenario 3: Already Pushed to GitHub</strong><br>
+                You pushed commits but realize they have issues<br>
+                → <strong>Use MERGE/REVERT:</strong> Don't use reset! (others may have pulled)<br>
+                → Better: Create new commit fixing the issue or revert
+            </div>
+            
+            <div class="qa-section">
+                <strong>Scenario 4: Undo Last Local Commit</strong><br>
+                Made wrong commit locally, not yet pushed<br>
+                → <strong>Use RESET:</strong> <code>git reset --soft HEAD~1</code>
+            </div>
+        </div>
+        
+        <!-- Section 11 (Old 10) -->
+        <div class="section">
+            <h2>11. Git Delete Operations</h2>
+            
+            <h3>Delete a Branch (Local):</h3>
+            <div class="code-block">
+git branch -d feature1      # Delete after merge (safe)
+git branch -D feature1      # Force delete (even if not merged)
+            </div>
+            
+            <h3>Delete a Branch (Remote - GitHub):</h3>
+            <div class="code-block">
+git push origin --delete feature1   # Delete from GitHub
+            </div>
+            
+            <h3>Delete a File and Track Deletion:</h3>
+            <div class="code-block">
+git rm filename.txt
+git commit -m "Deleted filename.txt"
+            </div>
+            
+            <h3>Untrack File But Keep Locally:</h3>
+            <div class="code-block">
+git rm --cached filename.txt
+git commit -m "Untracked filename.txt"
+            </div>
+            <p>This removes the file from Git tracking but keeps it on your machine (useful for config files, secrets, etc.)</p>
+        </div>
+        
+        <!-- Section 12 -->
+        <div class="section">
+            <h2>12. Real-Life GitHub Flow (Complete Example)</h2>
+            <p>This is how teams typically collaborate using Git and GitHub:</p>
+            
+            <div class="code-block">
+# 1. Clone the project
+git clone https://github.com/team/project.git
+cd project
+
+# 2. Create a feature branch
+git checkout -b feature/add-login
+
+# 3. Make changes to files
+# Edit app.py, config.py, etc.
+
+# 4. Stage changes
+git add .
+
+# 5. Commit with meaningful message
+git commit -m "Added login authentication feature"
+
+# 6. Push to GitHub
+git push origin feature/add-login
+
+# 7. Create Pull Request (PR) on GitHub
+# Go to GitHub → Click "Compare & Pull Request"
+# Add description and request reviewers
+
+# 8. Team reviews code and approves
+
+# 9. Merge PR on GitHub (or use command):
+# On main branch:
+git pull origin main
+git merge feature/add-login
+git push origin main
+
+# 10. Delete feature branch
+git branch -d feature/add-login
+git push origin --delete feature/add-login
+            </div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- Section 13 -->
+        <div class="section">
+            <h2>13. Interview Questions & Answers</h2>
+            
+            <div class="qa-section">
+                <strong>Q1. What is Git and why is it important?</strong><br><br>
+                <strong>A:</strong> Git is a distributed version control system that tracks changes in source code. It's important because it:<br>
+                • Enables team collaboration on code<br>
+                • Maintains complete history of all changes<br>
+                • Allows rollback to previous versions<br>
+                • Prevents data loss with multiple copies<br>
+                • Supports parallel development through branching
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q2. What is the difference between Git and GitHub?</strong><br><br>
+                <strong>A:</strong><br>
+                • <strong>Git</strong> = A version control tool that runs locally on your computer<br>
+                • <strong>GitHub</strong> = A cloud platform that hosts Git repositories for collaboration
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q3. What is a branch and why do we use branches?</strong><br><br>
+                <strong>A:</strong> A branch is a separate line of development. We use branches to:<br>
+                • Work on new features without affecting main code<br>
+                • Allow multiple developers to work independently<br>
+                • Test code before merging into production<br>
+                • Organize work by feature or bugfix
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q3b. What is the difference between merge, rebase, and reset?</strong><br><br>
+                <strong>A:</strong><br>
+                • <strong>Merge</strong> = Combines branches, creates merge commit, preserves history<br>
+                • <strong>Rebase</strong> = Replays commits linearly, rewrites history, cleaner but risky<br>
+                • <strong>Reset</strong> = Moves HEAD pointer, undoes commits, only for local use
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q4. What is the difference between merge and reset?</strong><br><br>
+                <strong>A:</strong><br>
+                • <strong>Merge</strong> = Combines changes from two branches, creates new commit, preserves history<br>
+                • <strong>Reset</strong> = Moves HEAD pointer to previous commit, can rewrite history, used for undoing
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q5. When should you use merge vs reset?</strong><br><br>
+                <strong>A:</strong><br>
+                • <strong>Use MERGE when:</strong> Combining feature branches into main, working with teams<br>
+                • <strong>Use RESET when:</strong> Undoing local commits not yet pushed, cleaning up local history
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q6. What are the types of git reset?</strong><br><br>
+                <strong>A:</strong><br>
+                • <strong>--soft</strong> = Undo commit, keep changes staged (ready to recommit)<br>
+                • <strong>--mixed</strong> = Undo commit, keep changes unstaged (need to git add again)<br>
+                • <strong>--hard</strong> = Undo commit and delete all changes (dangerous!)
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q7. What happens during a merge conflict?</strong><br><br>
+                <strong>A:</strong> A merge conflict occurs when two branches modified the same lines in a file differently. Git cannot automatically decide which version to keep. You must:<br>
+                • Manually edit the file to resolve conflict<br>
+                • Remove conflict markers (<<<, ===, >>>)<br>
+                • Stage the resolved file<br>
+                • Commit the merge
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q8. What is a Pull Request (PR)?</strong><br><br>
+                <strong>A:</strong> A Pull Request is a request to merge changes from one branch (usually feature branch) into another (like main). It allows team members to:<br>
+                • Review code before merging<br>
+                • Discuss changes and suggestions<br>
+                • Run automated tests<br>
+                • Maintain code quality
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q9. How do you undo the last commit?</strong><br><br>
+                <strong>A:</strong> There are two common ways:<br><br>
+                <strong>Option 1 (Rewrite History - Local Only):</strong><br>
+                <code>git reset --soft HEAD~1</code> - keeps changes staged<br>
+                <code>git reset --hard HEAD~1</code> - deletes changes<br><br>
+                <strong>Option 2 (Safe - Creates New Commit):</strong><br>
+                <code>git revert HEAD</code> - creates new commit that undoes the change
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q10. What is the difference between fetch and pull?</strong><br><br>
+                <strong>A:</strong><br>
+                • <strong>git fetch</strong> = Downloads changes from remote (doesn't merge)<br>
+                • <strong>git pull</strong> = Downloads AND merges changes from remote (fetch + merge)
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q11. What should you do before pushing to GitHub?</strong><br><br>
+                <strong>A:</strong><br>
+                • Run tests to ensure code works<br>
+                • Check for conflicts by pulling latest changes<br>
+                • Review your own code<br>
+                • Write meaningful commit messages<br>
+                • Verify you're on the correct branch
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q12. How do you recover a deleted branch?</strong><br><br>
+                <strong>A:</strong> If you accidentally deleted a branch, you can recover it using:<br>
+                <code>git reflog</code> - shows all branch operations<br>
+                <code>git checkout -b branch-name SHA-ID</code> - recreate branch from SHA
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q13. What is rebase and how is it different from merge?</strong><br><br>
+                <strong>A:</strong> Rebase rewrites commit history to create linear sequence of commits. Key differences:<br>
+                • <strong>Merge:</strong> Non-linear history, creates merge commit, safe for shared branches<br>
+                • <strong>Rebase:</strong> Linear history, replays commits, cleaner but risky for public commits
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q14. When should you use rebase?</strong><br><br>
+                <strong>A:</strong> Use rebase ONLY when:<br>
+                • Working on LOCAL feature branches<br>
+                • Commits haven't been pushed to GitHub yet<br>
+                • You're the only one working on the branch<br>
+                • You want clean, linear commit history<br><br>
+                <strong>NEVER rebase:</strong> Public commits, shared branches, or anything already pushed
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q15. What is interactive rebase?</strong><br><br>
+                <strong>A:</strong> Interactive rebase (<code>git rebase -i</code>) allows you to edit commits:<br>
+                • <strong>pick</strong> = Keep commit<br>
+                • <strong>squash</strong> = Combine with previous commit<br>
+                • <strong>reword</strong> = Change commit message<br>
+                • <strong>drop</strong> = Remove commit<br><br>
+                Usage: <code>git rebase -i HEAD~3</code> (edit last 3 commits)
+            </div>
+            
+            <div class="qa-section">
+                <strong>Q16. What is the golden rule of rebasing?</strong><br><br>
+                <strong>A:</strong> <strong>"Never rebase public history"</strong><br>
+                If commits are already pushed to shared repository and others have pulled them, DO NOT rebase. Use merge or revert instead. Rebase rewrites history which can cause problems for team members.
+            </div>
+        </div>
+        
+        <!-- Section 14 -->
+        <div class="section">
+            <h2>14. Quick Reference Table</h2>
+            
+            <table>
+                <tr>
+                    <th>Task</th>
+                    <th>Command</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Initialize repository</td>
+                    <td><code>git init</code></td>
+                    <td>Start tracking changes</td>
+                </tr>
+                <tr>
+                    <td>Clone repository</td>
+                    <td><code>git clone &lt;url&gt;</code></td>
+                    <td>Download project from GitHub</td>
+                </tr>
+                <tr>
+                    <td>Check status</td>
+                    <td><code>git status</code></td>
+                    <td>See current changes</td>
+                </tr>
+                <tr>
+                    <td>Stage files</td>
+                    <td><code>git add &lt;file&gt;</code> or <code>git add .</code></td>
+                    <td>Prepare changes for commit</td>
+                </tr>
+                <tr>
+                    <td>Commit changes</td>
+                    <td><code>git commit -m "message"</code></td>
+                    <td>Save snapshot with description</td>
+                </tr>
+                <tr>
+                    <td>View history</td>
+                    <td><code>git log</code></td>
+                    <td>See all commits</td>
+                </tr>
+                <tr>
+                    <td>Create branch</td>
+                    <td><code>git branch &lt;name&gt;</code></td>
+                    <td>Start new line of work</td>
+                </tr>
+                <tr>
+                    <td>Switch branch</td>
+                    <td><code>git checkout &lt;branch&gt;</code></td>
+                    <td>Move to different branch</td>
+                </tr>
+                <tr>
+                    <td>Create & switch</td>
+                    <td><code>git checkout -b &lt;branch&gt;</code></td>
+                    <td>Create and switch in one command</td>
+                </tr>
+                <tr>
+                    <td>List branches</td>
+                    <td><code>git branch</code></td>
+                    <td>Show all local branches</td>
+                </tr>
+                <tr>
+                    <td>Merge branch</td>
+                    <td><code>git merge &lt;branch&gt;</code></td>
+                    <td>Combine branches</td>
+                </tr>
+                <tr>
+                    <td>Push to GitHub</td>
+                    <td><code>git push origin &lt;branch&gt;</code></td>
+                    <td>Upload commits to remote</td>
+                </tr>
+                <tr>
+                    <td>Pull from GitHub</td>
+                    <td><code>git pull origin &lt;branch&gt;</code></td>
+                    <td>Download and merge changes</td>
+                </tr>
+                <tr>
+                    <td>Fetch updates</td>
+                    <td><code>git fetch origin</code></td>
+                    <td>Download without merging</td>
+                </tr>
+                <tr>
+                    <td>View differences</td>
+                    <td><code>git diff</code></td>
+                    <td>Compare changes</td>
+                </tr>
+                <tr>
+                    <td>Soft reset</td>
+                    <td><code>git reset --soft HEAD~1</code></td>
+                    <td>Undo commit, keep staged</td>
+                </tr>
+                <tr>
+                    <td>Mixed reset</td>
+                    <td><code>git reset --mixed HEAD~1</code></td>
+                    <td>Undo commit, unstage changes</td>
+                </tr>
+                <tr>
+                    <td>Hard reset</td>
+                    <td><code>git reset --hard HEAD~1</code></td>
+                    <td>Undo commit, delete changes</td>
+                </tr>
+                <tr>
+                    <td>Delete branch</td>
+                    <td><code>git branch -d &lt;name&gt;</code></td>
+                    <td>Remove local branch</td>
+                </tr>
+                <tr>
+                    <td>Delete file</td>
+                    <td><code>git rm &lt;file&gt;</code></td>
+                    <td>Remove and track deletion</td>
+                </tr>
+                <tr>
+                    <td>Revert commit</td>
+                    <td><code>git revert HEAD</code></td>
+                    <td>Create new commit undoing changes</td>
+                </tr>
+                <tr>
+                    <td>Show reflog</td>
+                    <td><code>git reflog</code></td>
+                    <td>View all reference operations</td>
+                </tr>
+                <tr>
+                    <td>Simple rebase</td>
+                    <td><code>git rebase main</code></td>
+                    <td>Replay commits linearly</td>
+                </tr>
+                <tr>
+                    <td>Interactive rebase</td>
+                    <td><code>git rebase -i HEAD~3</code></td>
+                    <td>Edit, squash, or drop commits</td>
+                </tr>
+                <tr>
+                    <td>Continue rebase</td>
+                    <td><code>git rebase --continue</code></td>
+                    <td>Resume after resolving conflicts</td>
+                </tr>
+                <tr>
+                    <td>Abort rebase</td>
+                    <td><code>git rebase --abort</code></td>
+                    <td>Cancel rebase operation</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Footer -->
+        <div class="section" style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 2px solid #0366d6;">
+            <p><strong>This comprehensive guide covers everything you need to know about Git and GitHub.</strong></p>
+            <p style="color: #666; font-size: 0.9em;">Best for interviews, learning, and quick reference. Study the merge vs reset section for senior developer roles.</p>
+        </div>
+    </div>
+</body>
+</html>
