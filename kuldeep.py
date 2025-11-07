@@ -90,4 +90,4 @@ while True:
         else:
             switch_player()
 
-print("Game over.")
+print("over.")
