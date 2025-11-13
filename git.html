@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git, GitHub & GitLab - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        body.light-mode {
+            background: #f5f5f5;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .navbar h1 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .controls-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .controls-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        select, button {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: white;
+            color: #667eea;
+        }
+
+        select:hover, button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        select:focus, button:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* PAGE 1: Overview */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.light-mode .card {
+            background: white;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+
+        .card h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .card-subtitle {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .definition {
+            background: #f8f9ff;
+            padding: 12px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+
+        .comparison-table h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .example-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .example-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .example {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .example strong {
+            color: #764ba2;
+        }
+
+        /* PAGE 2: Study Guide */
+        .study-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .study-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .study-header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .section h3 {
+            color: #24292e;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .key-points {
+            background-color: #f6f8fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .key-points li {
+            margin-bottom: 8px;
+            list-style-position: inside;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .workflow-box {
+            background-color: #e7f3ff;
+            border: 2px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .qa-section {
+            background-color: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .qa-section strong {
+            color: #667eea;
+        }
+
+        .toc {
+            background-color: #f6f8fa;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .toc ol {
+            margin-left: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .summary strong {
+            font-size: 1.3em;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 12px 20px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .pagination button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .page-info {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        body.light-mode .pagination button {
+            background: #f5f5f5;
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        body.light-mode .pagination button:hover,
+        body.light-mode .pagination button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        body.light-mode .study-container {
+            background: white;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .controls-group {
+                width: 100%;
+            }
+
+            select, button {
+                width: 100%;
+            }
+
+            .study-container {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1>📚 Git Complete Guide</h1>
+        <div class="nav-controls">
+            <div class="controls-group">
+                <label for="pageSelect">Select Page:</label>
+                <select id="pageSelect" onchange="switchPage(this.value)">
+                    <option value="page1">Overview (Git vs GitHub vs GitLab)</option>
+                    <option value="page2">Complete Study Guide</option>
+                </select>
+            </div>
+            <div class="controls-group">
+                <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- PAGE 1: Overview -->
+        <div id="page1" class="page active">
+            <div style="text-align: center; color: white; margin-bottom: 40px;">
+                <h1 style="font-size: 2.5em; margin-bottom: 10px;">🚀 Git vs GitHub vs GitLab</h1>
+                <p style="font-size: 1.1em; opacity: 0.9;">Understanding the Complete Developer Ecosystem</p>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Git Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon">⚙️</div>
+                        <div>
+                            <h2>Git</h2>
+                            <div class="card-subtitle">Version Control System</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="definition">
+                            Software that runs locally on your machine to track code changes
+                        </div>
+                        <ul class="features">
+                            <li>Track changes in code</li>
+                            <li>Save versions (snapshots)</li>
+                            <li>Rollback to previous versions</li>
+                            <li>Work on multiple branches</li>
+                            <li>Works offline</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GitHub Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon">🐙</div>
+                        <div>
+                            <h2>GitHub</h2>
+                            <div class="card-subtitle">Cloud Hosting Platform</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="definition">
+                            Cloud platform for hosting Git repositories and team collaboration
+                        </div>
+                        <ul class="features">
+                            <li>Remote repository hosting</li>
+                            <li>Pull Requests (code review)</li>
+                            <li>Issues & bug tracking</li>
+                            <li>GitHub Actions (CI/CD)</li>
+                            <li>Open-source community</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GitLab Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon">🦊</div>
+                        <div>
+                            <h2>GitLab</h2>
+                            <div class="card-subtitle">Git + DevOps Platform</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="definition">
+                            Complete DevOps platform with built-in CI/CD and security tools
+                        </div>
+                        <ul class="features">
+                            <li>CI/CD pipelines</li>
+                            <li>Security scanning (SAST, DAST)</li>
+                            <li>Automated testing</li>
+                            <li>Self-hosting option</li>
+                            <li>Project management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-table">
+                <h3>📊 Feature Comparison</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Git</th>
+                            <th>GitHub</th>
+                            <th>GitLab</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Type</strong></td>
+                            <td>Version Control Tool</td>
+                            <td>Repo Hosting Platform</td>
+                            <td>Repo Hosting + DevOps</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Works Offline</strong></td>
+                            <td>✅ Yes</td>
+                            <td>❌ No</td>
+                            <td>⚠️ Depends (Self-host: Yes)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pull/Merge Requests</strong></td>
+                            <td>❌ No</td>
+                            <td>✅ Pull Requests</td>
+                            <td>✅ Merge Requests</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CI/CD</strong></td>
+                            <td>❌ No</td>
+                            <td>GitHub Actions</td>
+                            <td>GitLab CI/CD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best For</strong></td>
+                            <td>Local versioning</td>
+                            <td>Open-source & collaboration</td>
+                            <td>Enterprise & DevOps</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Base</strong></td>
+                            <td>Developers</td>
+                            <td>Everyone (10M+ projects)</td>
+                            <td>Companies & enterprises</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example-section">
+                <h3>💡 Real-World Examples</h3>
+                <div class="example">
+                    <strong>👉 Git (Local Tool):</strong> You write code on your laptop → save changes locally using Git commands (init, add, commit, push)
+                </div>
+                <div class="example">
+                    <strong>👉 GitHub (Cloud Upload):</strong> You push that Git project to GitHub → share with team → create pull requests → merge code
+                </div>
+                <div class="example">
+                    <strong>👉 GitLab (Full DevOps):</strong> You push code to GitLab → pipelines run automatically → tests execute → code deploys to server automatically
+                </div>
+            </div>
+
+            <div class="summary">
+                <p>🎯 Quick Summary</p>
+                <strong>Git is the engine. GitHub and GitLab are the platforms that use Git – GitHub for collaboration, GitLab for complete DevOps automation.</strong>
+            </div>
+
+            <div class="pagination">
+                <button class="active" onclick="switchPage('page1')">Page 1</button>
+                <button onclick="switchPage('page2')">Page 2</button>
+                <div style="width: 100%;" class="page-info">📖 Page 1 of 2 - Overview</div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: Study Guide -->
+        <div id="page2" class="page">
+            <div class="study-container">
+                <div class="study-header">
+                    <h1>🧠 Git & GitHub</h1>
+                    <p>Complete Study Guide for Learning & Interviews</p>
+                </div>
+
+                <div class="toc">
+                    <h3>📋 Table of Contents</h3>
+                    <ol>
+                        <li>What is Git?</li>
+                        <li>What is GitHub?</li>
+                        <li>Basic Git Workflow</li>
+                        <li>Common Git Commands</li>
+                        <li>Branching in Git</li>
+                        <li>Git Merge - Detailed</li>
+                        <li>Git Reset - Detailed</li>
+                        <li>Git Rebase - Detailed</li>
+                        <li>Merge vs Rebase vs Reset</li>
+                        <li>Interview Questions</li>
+                        <li>Quick Reference</li>
+                    </ol>
+                </div>
+
+                <div class="section">
+                    <h2>1. What is Git?</h2>
+                    <p>Git is a Distributed Version Control System (DVCS) that helps developers track changes in code, collaborate with others, and revert to previous versions easily.</p>
+                    <h3>Key Features:</h3>
+                    <ul class="key-points">
+                        <li><strong>Tracks changes</strong> in source code with detailed history</li>
+                        <li><strong>Enables teamwork</strong> via branches and merging</li>
+                        <li><strong>Distributed</strong> - every user has a full copy</li>
+                        <li><strong>Offline capability</strong> - works without internet</li>
+                        <li><strong>Commit history</strong> - every version can be rolled back</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>2. What is GitHub?</h2>
+                    <p>GitHub is a cloud-based hosting platform for Git repositories. It helps you store, share, and collaborate on Git projects online with teams around the world.</p>
+                    <h3>Key Features:</h3>
+                    <ul class="key-points">
+                        <li><strong>Remote repository hosting</strong> - store projects in the cloud</li>
+                        <li><strong>Collaboration</strong> via Pull Requests and code reviews</li>
+                        <li><strong>Access control</strong> - manage who can view/edit code</li>
+                        <li><strong>CI/CD integration</strong> - automated testing and deployment</li>
+                        <li><strong>Integration with tools</strong> - VS Code, Docker, Jenkins, etc.</li>
+                    </ul>
+                    <div class="workflow-box">
+                        <strong>💡 Think of it like:</strong><br>
+                        • <strong>Git</strong> = Local tool for version control on your machine<br>
+                        • <strong>GitHub</strong> = Online home for your Git projects (remote storage)
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>3. Basic Git Workflow</h2>
+                    <p>Git has four stages where code moves through before being shared:</p>
+                    <div class="code-block">Working Directory → Staging Area → Local Repository → Remote Repository (GitHub)</div>
+                    <table>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Description</th>
+                            <th>Command</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Working Directory</strong></td>
+                            <td>Where you modify files on your machine</td>
+                            <td>Edit files directly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Staging Area</strong></td>
+                            <td>Files marked and ready to be committed</td>
+                            <td><code>git add</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Local Repository</strong></td>
+                            <td>Commits stored on your system</td>
+                            <td><code>git commit</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Remote Repository</strong></td>
+                            <td>Shared repository on GitHub</td>
+                            <td><code>git push</code></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>4. Common Git Commands</h2>
+                    <table>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><code>git init</code></td>
+                            <td>Initialize a new repository</td>
+                            <td><code>git init my-project</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git clone &lt;url&gt;</code></td>
+                            <td>Clone a remote repository</td>
+                            <td><code>git clone https://github.com/user/repo.git</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git status</code></td>
+                            <td>Show current changes</td>
+                            <td><code>git status</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git add &lt;file&gt;</code></td>
+                            <td>Stage specific file for commit</td>
+                            <td><code>git add main.py</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git add .</code></td>
+                            <td>Stage all modified files</td>
+                            <td><code>git add .</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git commit -m "msg"</code></td>
+                            <td>Save snapshot with message</td>
+                            <td><code>git commit -m "Fixed login bug"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git push origin &lt;br&gt;</code></td>
+                            <td>Upload to GitHub</td>
+                            <td><code>git push origin main</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git pull origin &lt;br&gt;</code></td>
+                            <td>Fetch and merge from GitHub</td>
+                            <td><code>git pull origin main</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git log</code></td>
+                            <td>Show commit history</td>
+                            <td><code>git log --oneline</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>git diff</code></td>
+                            <td>Show changes between commits</td>
+                            <td><code>git diff HEAD~1</code></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>5. Merge vs Reset vs Rebase</h2>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th><code>git merge</code></th>
+                            <th><code>git rebase</code></th>
+                            <th><code>git reset</code></th>
+                        </tr>
+                        <tr>
+                            <td><strong>Purpose</strong></td>
+                            <td>Combine two branches</td>
+                            <td>Rewrite history linearly</td>
+                            <td>Undo commits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Creates Commit?</strong></td>
+                            <td>Yes (merge commit)</td>
+                            <td>No (replays commits)</td>
+                            <td>No (moves HEAD)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>History</strong></td>
+                            <td>Non-linear but complete</td>
+                            <td>Linear and clean</td>
+                            <td>Rewritten/deleted</td>
+                        </tr>
+                        <tr>
+                            <td><strong>For Shared Repos?</strong></td>
+                            <td>✅ Safe & Recommended</td>
+                            <td>❌ Never on public commits</td>
+                            <td>❌ Local only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Typical Use</strong></td>
+                            <td>Merge feature to main</td>
+                            <td>Clean up feature branch</td>
+                            <td>Undo local mistakes</td>
+                        </tr>
+                    </table>
+
+                    <h3>When to Use Each:</h3>
+                    <div class="workflow-box">
+                        <strong>Use MERGE when:</strong> Combining feature branches into main, working with teams<br><br>
+                        <strong>Use REBASE when:</strong> Local feature branch, want clean history before pushing<br><br>
+                        <strong>Use RESET when:</strong> Undo local commits not yet pushed, cleaning up local history
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>6. Git Reset Types</h2>
+                    <table>
+                        <tr>
+                            <th>Reset Type</th>
+                            <th>Keeps Changes?</th>
+                            <th>Keeps Staged?</th>
+                            <th>Use Case</th>
+                        </tr>
+                        <tr>
+                            <td><code>--soft</code></td>
+                            <td>✅ Yes</td>
+                            <td>✅ Yes</td>
+                            <td>Undo commit but keep changes staged</td>
+                        </tr>
+                        <tr>
+                            <td><code>--mixed</code> (default)</td>
+                            <td>✅ Yes</td>
+                            <td>❌ No</td>
+                            <td>Unstage changes but keep files modified</td>
+                        </tr>
+                        <tr>
+                            <td><code>--hard</code></td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>Completely remove commits and changes</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>7. Interview Questions</h2>
+                    
+                    <div class="qa-section">
+                        <strong>Q: What is Git and why is it important?</strong><br><br>
+                        <strong>A:</strong> Git is a distributed version control system that tracks changes in source code. It enables team collaboration, maintains complete history, allows rollback to previous versions, prevents data loss with multiple copies, and supports parallel development through branching.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is the difference between Git and GitHub?</strong><br><br>
+                        <strong>A:</strong> Git = A version control tool that runs locally on your computer. GitHub = A cloud platform that hosts Git repositories for collaboration.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is a branch and why do we use branches?</strong><br><br>
+                        <strong>A:</strong> A branch is a separate line of development. We use branches to work on new features without affecting main code, allow multiple developers to work independently, test code before merging into production, and organize work by feature or bugfix.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is the difference between merge, rebase, and reset?</strong><br><br>
+                        <strong>A:</strong> Merge = Combines branches, creates merge commit, preserves history. Rebase = Replays commits linearly, rewrites history, cleaner but risky. Reset = Moves HEAD pointer, undoes commits, only for local use.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What happens during a merge conflict?</strong><br><br>
+                        <strong>A:</strong> A merge conflict occurs when two branches modified the same lines in a file differently. You must manually edit the file to resolve conflict, remove conflict markers, stage the resolved file, and commit the merge.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is a Pull Request (PR)?</strong><br><br>
+                        <strong>A:</strong> A Pull Request is a request to merge changes from one branch into another. It allows team members to review code before merging, discuss changes, run automated tests, and maintain code quality.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: How do you undo the last commit?</strong><br><br>
+                        <strong>A:</strong> Option 1 (Rewrite History - Local Only): <code>git reset --soft HEAD~1</code> (keeps changes staged) or <code>git reset --hard HEAD~1</code> (deletes changes). Option 2 (Safe - Creates New Commit): <code>git revert HEAD</code> (creates new commit that undoes the change).
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is the difference between fetch and pull?</strong><br><br>
+                        <strong>A:</strong> git fetch = Downloads changes from remote (doesn't merge). git pull = Downloads AND merges changes from remote (fetch + merge).
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is rebase and how is it different from merge?</strong><br><br>
+                        <strong>A:</strong> Rebase rewrites commit history to create linear sequence of commits. Merge = Non-linear history, creates merge commit, safe for shared branches. Rebase = Linear history, replays commits, cleaner but risky for public commits.
+                    </div>
+
+                    <div class="qa-section">
+                        <strong>Q: What is the golden rule of rebasing?</strong><br><br>
+                        <strong>A:</strong> "Never rebase public history". If commits are already pushed to shared repository and others have pulled them, DO NOT rebase. Use merge or revert instead.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>8. Quick Reference Commands</h2>
+                    <table>
+                        <tr>
+                            <th>Task</th>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td>Initialize repository</td>
+                            <td><code>git init</code></td>
+                            <td>Start tracking changes</td>
+                        </tr>
+                        <tr>
+                            <td>Clone repository</td>
+                            <td><code>git clone &lt;url&gt;</code></td>
+                            <td>Download project from GitHub</td>
+                        </tr>
+                        <tr>
+                            <td>Check status</td>
+                            <td><code>git status</code></td>
+                            <td>See current changes</td>
+                        </tr>
+                        <tr>
+                            <td>Stage files</td>
+                            <td><code>git add .</code></td>
+                            <td>Prepare changes for commit</td>
+                        </tr>
+                        <tr>
+                            <td>Commit changes</td>
+                            <td><code>git commit -m "msg"</code></td>
+                            <td>Save snapshot with description</td>
+                        </tr>
+                        <tr>
+                            <td>View history</td>
+                            <td><code>git log --oneline</code></td>
+                            <td>See all commits</td>
+                        </tr>
+                        <tr>
+                            <td>Create branch</td>
+                            <td><code>git branch &lt;name&gt;</code></td>
+                            <td>Start new line of work</td>
+                        </tr>
+                        <tr>
+                            <td>Switch branch</td>
+                            <td><code>git checkout &lt;branch&gt;</code></td>
+                            <td>Move to different branch</td>
+                        </tr>
+                        <tr>
+                            <td>Create & switch</td>
+                            <td><code>git checkout -b &lt;branch&gt;</code></td>
+                            <td>Create and switch in one command</td>
+                        </tr>
+                        <tr>
+                            <td>List branches</td>
+                            <td><code>git branch -a</code></td>
+                            <td>Show all local and remote branches</td>
+                        </tr>
+                        <tr>
+                            <td>Merge branch</td>
+                            <td><code>git merge &lt;branch&gt;</code></td>
+                            <td>Combine branches</td>
+                        </tr>
+                        <tr>
+                            <td>Push to GitHub</td>
+                            <td><code>git push origin &lt;branch&gt;</code></td>
+                            <td>Upload commits to remote</td>
+                        </tr>
+                        <tr>
+                            <td>Pull from GitHub</td>
+                            <td><code>git pull origin &lt;branch&gt;</code></td>
+                            <td>Download and merge changes</td>
+                        </tr>
+                        <tr>
+                            <td>Fetch updates</td>
+                            <td><code>git fetch origin</code></td>
+                            <td>Download without merging</td>
+                        </tr>
+                        <tr>
+                            <td>View differences</td>
+                            <td><code>git diff</code></td>
+                            <td>Compare changes</td>
+                        </tr>
+                        <tr>
+                            <td>Soft reset</td>
+                            <td><code>git reset --soft HEAD~1</code></td>
+                            <td>Undo commit, keep staged</td>
+                        </tr>
+                        <tr>
+                            <td>Hard reset</td>
+                            <td><code>git reset --hard HEAD~1</code></td>
+                            <td>Undo commit, delete changes</td>
+                        </tr>
+                        <tr>
+                            <td>Delete branch</td>
+                            <td><code>git branch -d &lt;name&gt;</code></td>
+                            <td>Remove local branch</td>
+                        </tr>
+                        <tr>
+                            <td>Rebase branch</td>
+                            <td><code>git rebase main</code></td>
+                            <td>Replay commits linearly</td>
+                        </tr>
+                        <tr>
+                            <td>Interactive rebase</td>
+                            <td><code>git rebase -i HEAD~3</code></td>
+                            <td>Edit, squash, or drop commits</td>
+                        </tr>
+                        <tr>
+                            <td>Revert commit</td>
+                            <td><code>git revert HEAD</code></td>
+                            <td>Create new commit undoing changes</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>9. Real-Life GitHub Flow</h2>
+                    <p>This is how teams typically collaborate using Git and GitHub:</p>
+                    <div class="code-block">
+# 1. Clone the project
+git clone https://github.com/team/project.git
+cd project
+
+# 2. Create a feature branch
+git checkout -b feature/add-login
+
+# 3. Make changes to files
+# Edit app.py, config.py, etc.
+
+# 4. Stage and commit changes
+git add .
+git commit -m "Added login authentication feature"
+
+# 5. Push to GitHub
+git push origin feature/add-login
+
+# 6. Create Pull Request on GitHub
+# Go to GitHub → Click "Compare & Pull Request"
+
+# 7. Team reviews code and approves
+
+# 8. Merge PR on GitHub or use command:
+git pull origin main
+git merge feature/add-login
+git push origin main
+
+# 9. Delete feature branch
+git branch -d feature/add-login
+git push origin --delete feature/add-login
+                    </div>
+                </div>
+
+                <div class="summary">
+                    <p>🎯 Key Takeaways</p>
+                    <strong>Master Git basics: understand merge (for teams), reset (for local), and rebase (for clean history). Always use merge on shared branches, reset only locally, and never rebase public commits.</strong>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button onclick="switchPage('page1')">Page 1</button>
+                <button class="active" onclick="switchPage('page2')">Page 2</button>
+                <div style="width: 100%;" class="page-info">📖 Page 2 of 2 - Complete Study Guide</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update dropdown
+            document.getElementById('pageSelect').value = pageId;
+
+            // Update pagination buttons
+            const buttons = document.querySelectorAll('.pagination button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (pageId === 'page1') {
+                buttons[0].classList.add('active');
+            } else {
+                buttons[1].classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const button = event.target;
+            button.textContent = document.body.classList.contains('light-mode') 
+                ? '🌙 Dark Mode' 
+                : '🌓 Light Mode';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                const currentPage = document.querySelector('.page.active').id;
+                if (currentPage === 'page1') switchPage('page2');
+            } else if (e.key === 'ArrowLeft') {
+                const currentPage = document.querySelector('.page.active').id;
+                if (currentPage === 'page2') switchPage('page1');
+            }
+        });
+    </script>
+</body>
+</html>
