@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git vs GitHub vs GitLab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+
+        .card h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .card-subtitle {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .card-content {
+            margin: 20px 0;
+        }
+
+        .definition {
+            background: #f8f9ff;
+            padding: 12px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+
+        .comparison-table h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .example-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .example-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .example {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .example strong {
+            color: #764ba2;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .summary strong {
+            font-size: 1.3em;
+            display: block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Git vs GitHub vs GitLab</h1>
+            <p>Understanding the Complete Developer Ecosystem</p>
+        </header>
+
+        <!-- Three Cards Section -->
+        <div class="cards-grid">
+            <!-- Git Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">⚙️</div>
+                    <div>
+                        <h2>Git</h2>
+                        <div class="card-subtitle">Version Control System</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="definition">
+                        Software that runs locally on your machine to track code changes
+                    </div>
+                    <ul class="features">
+                        <li>Track changes in code</li>
+                        <li>Save versions (snapshots)</li>
+                        <li>Rollback to previous versions</li>
+                        <li>Work on multiple branches</li>
+                        <li>Works offline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GitHub Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">🐙</div>
+                    <div>
+                        <h2>GitHub</h2>
+                        <div class="card-subtitle">Cloud Hosting Platform</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="definition">
+                        Cloud platform for hosting Git repositories and team collaboration
+                    </div>
+                    <ul class="features">
+                        <li>Remote repository hosting</li>
+                        <li>Pull Requests (code review)</li>
+                        <li>Issues & bug tracking</li>
+                        <li>GitHub Actions (CI/CD)</li>
+                        <li>Open-source community</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GitLab Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon">🦊</div>
+                    <div>
+                        <h2>GitLab</h2>
+                        <div class="card-subtitle">Git + DevOps Platform</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="definition">
+                        Complete DevOps platform with built-in CI/CD and security tools
+                    </div>
+                    <ul class="features">
+                        <li>CI/CD pipelines</li>
+                        <li>Security scanning (SAST, DAST)</li>
+                        <li>Automated testing</li>
+                        <li>Self-hosting option</li>
+                        <li>Project management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-table">
+            <h3>📊 Feature Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Git</th>
+                        <th>GitHub</th>
+                        <th>GitLab</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Type</strong></td>
+                        <td>Version Control Tool</td>
+                        <td>Repo Hosting Platform</td>
+                        <td>Repo Hosting + DevOps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Works Offline</strong></td>
+                        <td>✅ Yes</td>
+                        <td>❌ No</td>
+                        <td>⚠️ Depends (Self-host: Yes)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pull/Merge Requests</strong></td>
+                        <td>❌ No</td>
+                        <td>✅ Pull Requests</td>
+                        <td>✅ Merge Requests</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CI/CD</strong></td>
+                        <td>❌ No</td>
+                        <td>GitHub Actions</td>
+                        <td>GitLab CI/CD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>Local versioning</td>
+                        <td>Open-source & collaboration</td>
+                        <td>Enterprise & DevOps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User Base</strong></td>
+                        <td>Developers</td>
+                        <td>Everyone (10M+ projects)</td>
+                        <td>Companies & enterprises</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Examples Section -->
+        <div class="example-section">
+            <h3>💡 Real-World Examples</h3>
+            <div class="example">
+                <strong>👉 Git (Local Tool):</strong> You write code on your laptop → save changes locally using Git commands (init, add, commit, push)
+            </div>
+            <div class="example">
+                <strong>👉 GitHub (Cloud Upload):</strong> You push that Git project to GitHub → share with team → create pull requests → merge code
+            </div>
+            <div class="example">
+                <strong>👉 GitLab (Full DevOps):</strong> You push code to GitLab → pipelines run automatically → tests execute → code deploys to server automatically
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary">
+            <p>🎯 Quick Summary</p>
+            <strong>Git is the engine. GitHub and GitLab are the platforms that use Git — GitHub for collaboration, GitLab for complete DevOps automation.</strong>
+        </div>
+    </div>
+</body>
+</html>
