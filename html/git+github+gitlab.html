@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GitHub for DevOps — Step-by-step (Beginner → Advanced)</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--panel:#0b1220}
+    body{font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; margin:0; background:linear-gradient(180deg,#041024 0%, #071022 100%); color:#e6eef6}
+    .wrap{max-width:980px;margin:28px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    h1{font-size:26px;margin:0 0 6px}
+    p.lead{color:var(--muted);margin:6px 0 22px}
+    nav.toc{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;margin-bottom:20px}
+    nav.toc a{display:inline-block;margin:6px 10px 6px 0;color:var(--accent);text-decoration:none}
+    section.card{background:rgba(255,255,255,0.01);padding:18px;border-radius:10px;margin-bottom:16px}
+    pre{background:#021026;padding:12px;border-radius:8px;overflow:auto;color:#cfeef8}
+    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace}
+    .screenshot{display:block;max-width:100%;height:auto;border:1px solid rgba(255,255,255,0.03);border-radius:8px;margin:12px 0}
+    .exercise{background:linear-gradient(180deg,#021428,#031827);padding:12px;border-radius:8px;margin-top:12px}
+    .q{margin:10px 0}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    td,th{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .hint{color:var(--muted);font-size:13px}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);margin-right:8px;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>GitHub for DevOps — Step-by-step (Beginner → Advanced)</h1>
+    <p class="lead">A practical, hands-on HTML guide built to teach you Git & GitHub workflows used in DevOps. Each chapter contains explanations, commands, examples, screenshots (placeholders you can replace), and practice questions.</p>
+
+    <nav class="toc">
+      <strong>Contents:</strong>
+      <a href="#ch1">1. Setup & Basics</a>
+      <a href="#ch2">2. Branching & Merging</a>
+      <a href="#ch3">3. Collaboration & PRs</a>
+      <a href="#ch4">4. GitHub Actions (CI/CD)</a>
+      <a href="#ch5">5. Advanced Git</a>
+      <a href="#ch6">6. Security & Best Practices</a>
+      <a href="#exercises">Practice Tasks & Questions</a>
+    </nav>
+
+    <!-- Chapter 1 -->
+    <section id="ch1" class="card">
+      <h2>Chapter 1 — Setup & Basics</h2>
+      <p>Goal: install Git, create a GitHub account, initialise repositories, make commits, push/pull. This chapter assumes no prior knowledge.</p>
+
+      <h3>1.1 Install Git</h3>
+      <p>Install on Linux (Debian/Ubuntu):</p>
+      <pre><code>sudo apt update
+sudo apt install git -y
+git --version</code></pre>
+      <p>Install on macOS (Homebrew):</p>
+      <pre><code>brew install git
+git --version</code></pre>
+      <p>Install on Windows: download the Git for Windows installer (https://git-scm.com) and run it.</p>
+
+      <h3>1.2 Configure Git</h3>
+      <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global core.editor "code --wait"  # optional (VS Code)</code></pre>
+
+      <h3>1.3 Create a GitHub account & repository</h3>
+      <p>Steps (brief): sign up at <em>github.com</em> → New repository → name it <code>devops-demo</code> → choose Public/Private → Initialize with README (optional).</p>
+      <img class="screenshot" src="screenshots/github_new_repo_placeholder.png" alt="Placeholder: GitHub 'Create new repository' page. Replace with a real screenshot by saving to screenshots/github_new_repo.png and updating path.">
+      <p class="hint">Screenshot placeholder — replace with your own capture. To capture: open GitHub in browser, press PrtSc (Win) / Cmd+Shift+4 (mac) or use built-in screenshot tool.</p>
+
+      <h3>1.4 Local repo → commit → push</h3>
+      <pre><code>mkdir devops-demo
+cd devops-demo
+git init
+# create a file
+echo "# DevOps Demo" &gt; README.md
+git add README.md
+git commit -m "chore: add README"
+# link remote (from GitHub repo page)
+git remote add origin git@github.com:YOUR_USERNAME/devops-demo.git
+# push the main branch
+git push -u origin main</code></pre>
+
+      <h3>1.5 Example: Fixing a small typo</h3>
+      <pre><code># make change
+sed -i 's/Dovops/DevOps/' README.md
+git add README.md
+git commit -m "fix: typo in README"
+git push</code></pre>
+
+      <div class="exercise">
+        <strong>Quick questions</strong>
+        <div class="q">1. What does <code>git init</code> do?</div>
+        <div class="q">2. How do you set your global username &amp; email?</div>
+        <div class="q">3. Explain the difference between <code>git add</code> and <code>git commit</code>.</div>
+      </div>
+    </section>
+
+    <!-- Chapter 2 -->
+    <section id="ch2" class="card">
+      <h2>Chapter 2 — Branching & Merging</h2>
+      <p>Goal: learn branching strategies used in DevOps: feature branches, trunk-based, GitFlow basics, resolving merge conflicts.</p>
+
+      <h3>2.1 Create and switch branches</h3>
+      <pre><code>git checkout -b feature/nginx-setup
+# work on files
+git add .
+git commit -m "feat: add nginx config"
+# push branch
+git push -u origin feature/nginx-setup</code></pre>
+
+      <h3>2.2 Merge into main (fast-forward vs. merge commit)</h3>
+      <pre><code># on local main
+git checkout main
+git pull origin main
+git merge --no-ff feature/nginx-setup
+git push</code></pre>
+      <p>Use <code>--no-ff</code> if you want an explicit merge commit to keep history of feature branches.</p>
+
+      <h3>2.3 Rebase (when to use)</h3>
+      <p>Rebase keeps a linear history. Use carefully in private branches.</p>
+      <pre><code># rebase feature branch on updated main
+git checkout feature/nginx-setup
+git fetch origin
+git rebase origin/main
+# resolve conflicts if any, then
+git rebase --continue
+git push --force-with-lease</code></pre>
+
+      <h3>2.4 Example conflict workflow</h3>
+      <ol>
+        <li>Two devs modify same line in file.</li>
+        <li>When you rebase or merge, Git will mark conflict sections with <<<<<<<, =======, >>>>>>>.</li>
+      </ol>
+      <pre><code># open file, edit the conflict, remove markers
+git add conflicted-file
+git rebase --continue</code></pre>
+
+      <div class="exercise">
+        <strong>Practical task</strong>
+        <p>Create two branches and force a merge conflict between them. Resolve the conflict and push the result. Questions:</p>
+        <div class="q">1. When is it appropriate to use <code>git rebase</code> vs <code>git merge</code>?</div>
+        <div class="q">2. What does <code>--force-with-lease</code> protect against?</div>
+      </div>
+    </section>
+
+    <!-- Chapter 3 -->
+    <section id="ch3" class="card">
+      <h2>Chapter 3 — Collaboration & Pull Requests</h2>
+      <p>Goal: create PRs, request reviews, use protected branches, use reviewers & code owners, and squash commits when merging.</p>
+
+      <h3>3.1 Forks vs branches</h3>
+      <p>Open source: fork the repo &amp; make branches in your fork, then open a PR to upstream. Internal orgs: create a branch in the same repo and open a PR directly.</p>
+
+      <h3>3.2 Create a Pull Request (PR)</h3>
+      <ol>
+        <li>Push feature branch to GitHub.</li>
+        <li>On GitHub, click "Compare & pull request".</li>
+        <li>Fill title, description, link issue, assign reviewers.</li>
+      </ol>
+      <img class="screenshot" src="screenshots/github_pr_placeholder.png" alt="Placeholder: GitHub create pull request screen. Replace with your own screenshot.">
+
+      <h3>3.3 PR best practices (DevOps-focused)</h3>
+      <ul>
+        <li>Small, focused PRs that change one concern.</li>
+        <li>Include setup/test steps in PR description so CI replicates environment.</li>
+        <li>Link Jira/issue ticket IDs and deployment notes.</li>
+      </ul>
+
+      <h3>3.4 Review & merge strategies</h3>
+      <p>Common strategies: squash-and-merge (clean history), merge commit (keeps branches), rebase-and-merge (linear history).</p>
+
+      <div class="exercise">
+        <strong>Review checklist (example)</strong>
+        <table>
+          <tr><th>Item</th><th>Check</th></tr>
+          <tr><td>Does code compile / pass tests?</td><td>✔️/❌</td></tr>
+          <tr><td>Security-sensitive changes?</td><td>✔️/❌</td></tr>
+          <tr><td>Has documentation been updated?</td><td>✔️/❌</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- Chapter 4 -->
+    <section id="ch4" class="card">
+      <h2>Chapter 4 — GitHub Actions (CI/CD)</h2>
+      <p>Goal: build a simple CI pipeline with GitHub Actions, run tests, build image, and deploy (example: deploy to DockerHub or push artifact to cloud).</p>
+
+      <h3>4.1 Anatomy of a workflow</h3>
+      <pre><code># .github/workflows/ci.yml
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm ci
+      - name: Run tests
+        run: npm test</code></pre>
+
+      <h3>4.2 Example: Build Docker image & push to Docker Hub</h3>
+      <pre><code>jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: youruser/yourimage:latest</code></pre>
+
+      <h3>4.3 Secrets & environment protection</h3>
+      <p>Store credentials in repository or organization Secrets. Use required reviewers and environment protection rules before deployment jobs run.</p>
+
+      <div class="exercise">
+        <strong>Hands-on</strong>
+        <p>Create the above workflow, add a failing test, and watch Actions show the failure. Fix the test and observe green checks.</p>
+        <div class="q">1. How do you limit a workflow to only run on push to tags?</div>
+        <div class="q">2. Where should deployment secrets live (repo-level or org-level)? Why?</div>
+      </div>
+    </section>
+
+    <!-- Chapter 5 -->
+    <section id="ch5" class="card">
+      <h2>Chapter 5 — Advanced Git (rewriting history, bisect, submodules)</h2>
+
+      <h3>5.1 Interactive rebase (cleaning commits)</h3>
+      <pre><code>git checkout feature/x
+git rebase -i origin/main
+# mark commits as pick / squash / fixup to combine them
+# finish, then push with --force-with-lease</code></pre>
+
+      <h3>5.2 git bisect (finding a bad commit)</h3>
+      <pre><code>git bisect start
+git bisect bad           # current bad rev
+git bisect good v1.2.3   # known good rev
+# git will checkout middle commit; test; mark good/bad until location found
+git bisect reset</code></pre>
+
+      <h3>5.3 Submodules & monorepos</h3>
+      <pre><code># add submodule
+git submodule add https://github.com/yourorg/somelib.git libs/somelib
+git submodule update --init --recursive</code></pre>
+
+      <div class="exercise">
+        <strong>Advanced questions</strong>
+        <div class="q">1. What are the risks of force-pushing to shared branches?</div>
+        <div class="q">2. When are submodules useful vs a monorepo?</div>
+      </div>
+    </section>
+
+    <!-- Chapter 6 -->
+    <section id="ch6" class="card">
+      <h2>Chapter 6 — Security & Best Practices (DevOps)</h2>
+      <ul>
+        <li>Use branch protection rules for main and release branches.</li>
+        <li>Use CODEOWNERS to require specific reviewers for sensitive paths.</li>
+        <li>Audit repository secrets and rotate tokens regularly.</li>
+        <li>Enable Dependabot for dependency updates and security alerts.</li>
+      </ul>
+
+      <h3>6.1 Example CODEOWNERS</h3>
+      <pre><code># in .github/CODEOWNERS
+/docs/ @doc-team
+/deploy/ @devops-team</code></pre>
+
+      <div class="exercise">
+        <strong>Checklist</strong>
+        <div class="q">1. Name two ways to prevent secrets from being leaked in PRs.</div>
+        <div class="q">2. How does Dependabot help your CI/CD pipeline?</div>
+      </div>
+    </section>
+
+    <!-- Exercises collection -->
+    <section id="exercises" class="card">
+      <h2>Practice Tasks &amp; Questions (Full List)</h2>
+      <ol>
+        <li>Setup: Install Git, clone a repo, make 3 commits and push to a new branch.</li>
+        <li>Branching: Create feature branches, rebase onto main, then merge with a merge commit.</li>
+        <li>PR: Open a PR, request a review, respond to comments, and squash commits before merging.</li>
+        <li>CI/CD: Create a GitHub Action that runs tests and builds a Docker image on push to main.</li>
+        <li>Advanced: Use <code>git bisect</code> to identify a regression in a sample repo.</li>
+      </ol>
+
+      <h3>Interview-style questions</h3>
+      <ul>
+        <li>Explain the difference between <code>git fetch</code> and <code>git pull</code>.</li>
+        <li>Describe a Git branching model you'd use for a continuous delivery team and why.</li>
+        <li>How would you secure a workflow that deploys to production from GitHub Actions?</li>
+      </ul>
+
+      <footer>
+        <div class="badge">How to add real screenshots</div>
+        <p class="hint">This HTML uses placeholder images in the <code>screenshots/</code> folder. To include real screenshots: take the screenshots on your machine, save them into a folder named <code>screenshots</code> next to this HTML file (e.g. <code>screenshots/github_new_repo.png</code>), then open this HTML in a browser — the images will appear.</p>
+        <p class="hint">If you want, I can generate example screenshots for each step; either upload your own images or say "generate screenshots" and I will add simulated images (note: I will need info about your OS and browser to produce tailored captures).</p>
+      </footer>
+    </section>
+  </div>
+</body>
+</html>
