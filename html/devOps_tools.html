@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Tools Hierarchy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            margin: 0 auto;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: 1px;
+        }
+        
+        .hierarchy {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .level {
+            margin: 12px 0;
+        }
+        
+        .level-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: #000;
+            padding: 6px 0;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #000;
+            letter-spacing: 0.5px;
+        }
+        
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .tool-item {
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .tool-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .tool-logo {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .tool-name {
+            font-size: 13px;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 2px;
+            letter-spacing: 0.3px;
+        }
+        
+        .tool-desc {
+            font-size: 10px;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 0.2px;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 12px;
+            font-size: 10px;
+            padding-top: 8px;
+            border-top: 2px solid #000;
+        }
+        
+        .legend-item {
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 0.3px;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 9px;
+            color: #000;
+            margin-top: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="title">DEVOPS TOOLS HIERARCHY & IMPORTANCE</div>
+            
+            <div class="hierarchy">
+                <!-- Level 1: Version Control & Collaboration -->
+                <div class="level">
+                    <div class="level-title">LEVEL 1: VERSION CONTROL & COLLABORATION</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png');"></div>
+                            <div class="tool-name">GIT</div>
+                            <div class="tool-desc">Version Control</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png');"></div>
+                            <div class="tool-name">GITHUB/GITLAB</div>
+                            <div class="tool-desc">Repository Hosting</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://wac-cdn.atlassian.com/dam/jcr:e348dbf1-5b0a-415f-888c-2b2e91645dd8/Jira%20Core%20Logo.svg');"></div>
+                            <div class="tool-name">JIRA</div>
+                            <div class="tool-desc">Issue Tracking</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/slack/slack-icon.svg');"></div>
+                            <div class="tool-name">SLACK</div>
+                            <div class="tool-desc">Team Communication</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 2: CI/CD & Build Automation -->
+                <div class="level">
+                    <div class="level-title">LEVEL 2: CI/CD & BUILD AUTOMATION</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg');"></div>
+                            <div class="tool-name">JENKINS</div>
+                            <div class="tool-desc">CI/CD Orchestration</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/gitlab/gitlab-icon.svg');"></div>
+                            <div class="tool-name">GITLAB CI/CD</div>
+                            <div class="tool-desc">Pipeline Automation</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/github/github-icon.svg');"></div>
+                            <div class="tool-name">GITHUB ACTIONS</div>
+                            <div class="tool-desc">Workflow Automation</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/sonarqube/sonarqube-icon.svg');"></div>
+                            <div class="tool-name">SONARQUBE</div>
+                            <div class="tool-desc">Code Quality Analysis</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 3: Containerization & Orchestration -->
+                <div class="level">
+                    <div class="level-title">LEVEL 3: CONTAINERIZATION & ORCHESTRATION</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/docker/docker-icon.svg');"></div>
+                            <div class="tool-name">DOCKER</div>
+                            <div class="tool-desc">Container Engine</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg');"></div>
+                            <div class="tool-name">KUBERNETES</div>
+                            <div class="tool-desc">Container Orchestration</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/docker/docker-icon.svg');"></div>
+                            <div class="tool-name">DOCKER COMPOSE</div>
+                            <div class="tool-desc">Multi-Container</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/helm_sh/helm_sh-icon.svg');"></div>
+                            <div class="tool-name">HELM</div>
+                            <div class="tool-desc">K8s Package Manager</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 4: Infrastructure as Code & Configuration -->
+                <div class="level">
+                    <div class="level-title">LEVEL 4: INFRASTRUCTURE AS CODE & CONFIGURATION</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/terraform_io/terraform_io-icon.svg');"></div>
+                            <div class="tool-name">TERRAFORM</div>
+                            <div class="tool-desc">IaC Provisioning</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg');"></div>
+                            <div class="tool-name">ANSIBLE</div>
+                            <div class="tool-desc">Config Management</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/chef_io/chef_io-icon.svg');"></div>
+                            <div class="tool-name">CHEF/PUPPET</div>
+                            <div class="tool-desc">Infrastructure Mgmt</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/vagrantup_com/vagrantup_com-icon.svg');"></div>
+                            <div class="tool-name">VAGRANT</div>
+                            <div class="tool-desc">VM Environment Setup</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 5: Monitoring, Logging & Observability -->
+                <div class="level">
+                    <div class="level-title">LEVEL 5: MONITORING, LOGGING & OBSERVABILITY</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/prometheusio/prometheusio-icon.svg');"></div>
+                            <div class="tool-name">PROMETHEUS</div>
+                            <div class="tool-desc">Metrics Collection</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg');"></div>
+                            <div class="tool-name">ELK STACK</div>
+                            <div class="tool-desc">Logging & Analytics</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg');"></div>
+                            <div class="tool-name">GRAFANA</div>
+                            <div class="tool-desc">Visualization & Dashboards</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/datadoghq/datadoghq-icon.svg');"></div>
+                            <div class="tool-name">DATADOG/NEW RELIC</div>
+                            <div class="tool-desc">APM Monitoring</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Legend and Footer -->
+                <div class="legend">
+                    <div class="legend-item">■ CRITICAL - MUST HAVE</div>
+                    <div class="legend-item">■ HIGH - HIGHLY IMPORTANT</div>
+                    <div class="legend-item">■ MEDIUM - IMPORTANT</div>
+                    <div class="legend-item">■ LOW - SUPPORTING</div>
+                </div>
+                
+                <div class="footer">
+                    DEVOPS TOOLS & SERVICES HIERARCHY | BASED ON IMPLEMENTATION PRIORITY & FREQUENCY OF USE | A4 LANDSCAPE FORMAT
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

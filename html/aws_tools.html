@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS DevOps Tools Hierarchy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            margin: 0 auto;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: 1px;
+        }
+        
+        .hierarchy {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .level {
+            margin: 12px 0;
+        }
+        
+        .level-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: #000;
+            padding: 6px 0;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #000;
+            letter-spacing: 0.5px;
+        }
+        
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .tool-item {
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .tool-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .tool-logo {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .tool-name {
+            font-size: 13px;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 2px;
+            letter-spacing: 0.3px;
+        }
+        
+        .tool-desc {
+            font-size: 10px;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 0.2px;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 12px;
+            font-size: 10px;
+            padding-top: 8px;
+            border-top: 2px solid #000;
+        }
+        
+        .legend-item {
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 0.3px;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 9px;
+            color: #000;
+            margin-top: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="title">AWS DEVOPS TOOLS HIERARCHY & IMPORTANCE</div>
+            
+            <div class="hierarchy">
+                <!-- Level 1: Foundation & Core Infrastructure -->
+                <div class="level">
+                    <div class="level-title">LEVEL 1: FOUNDATION & CORE INFRASTRUCTURE</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">EC2</div>
+                            <div class="tool-desc">Compute Instances</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_s3/amazon_s3-icon.svg');"></div>
+                            <div class="tool-name">S3</div>
+                            <div class="tool-desc">Storage & Artifacts</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">VPC</div>
+                            <div class="tool-desc">Network Isolation</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">IAM</div>
+                            <div class="tool-desc">Access Management</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 2: CI/CD Pipeline & Deployment -->
+                <div class="level">
+                    <div class="level-title">LEVEL 2: CI/CD PIPELINE & DEPLOYMENT</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">CODEPIPELINE</div>
+                            <div class="tool-desc">Orchestration</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">CODEBUILD</div>
+                            <div class="tool-desc">Build Service</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">CODEDEPLOY</div>
+                            <div class="tool-desc">Deployment</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/docker/docker-icon.svg');"></div>
+                            <div class="tool-name">ECR</div>
+                            <div class="tool-desc">Container Registry</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 3: Container & Orchestration -->
+                <div class="level">
+                    <div class="level-title">LEVEL 3: CONTAINER & ORCHESTRATION</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/docker/docker-icon.svg');"></div>
+                            <div class="tool-name">ECS</div>
+                            <div class="tool-desc">Container Service</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg');"></div>
+                            <div class="tool-name">EKS</div>
+                            <div class="tool-desc">Kubernetes Service</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/aws_lambda/aws_lambda-icon.svg');"></div>
+                            <div class="tool-name">LAMBDA</div>
+                            <div class="tool-desc">Serverless Computing</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">ELASTIC BEANSTALK</div>
+                            <div class="tool-desc">App Platform</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 4: Monitoring, Logging & Observability -->
+                <div class="level">
+                    <div class="level-title">LEVEL 4: MONITORING, LOGGING & OBSERVABILITY</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_cloudwatch/amazon_cloudwatch-icon.svg');"></div>
+                            <div class="tool-name">CLOUDWATCH</div>
+                            <div class="tool-desc">Monitoring & Logs</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">X-RAY</div>
+                            <div class="tool-desc">Tracing & Analysis</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">CLOUDTRAIL</div>
+                            <div class="tool-desc">Audit Logs</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">SNS/SQS</div>
+                            <div class="tool-desc">Alerts & Messaging</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level 5: Configuration & Infrastructure as Code -->
+                <div class="level">
+                    <div class="level-title">LEVEL 5: CONFIGURATION & INFRASTRUCTURE AS CODE</div>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">CLOUDFORMATION</div>
+                            <div class="tool-desc">IaC Templates</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">SYSTEMS MANAGER</div>
+                            <div class="tool-desc">Configuration Mgmt</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg');"></div>
+                            <div class="tool-name">OPSWORKS</div>
+                            <div class="tool-desc">Configuration Automation</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-logo" style="background-image: url('https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg');"></div>
+                            <div class="tool-name">AWS CONFIG</div>
+                            <div class="tool-desc">Compliance Tracking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Legend and Footer -->
+                <div class="legend">
+                    <div class="legend-item">■ CRITICAL - MUST HAVE</div>
+                    <div class="legend-item">■ HIGH - HIGHLY IMPORTANT</div>
+                    <div class="legend-item">■ MEDIUM - IMPORTANT</div>
+                    <div class="legend-item">■ LOW - SUPPORTING</div>
+                </div>
+                
+                <div class="footer">
+                    AWS DEVOPS TOOLS & SERVICES HIERARCHY | BASED ON IMPLEMENTATION PRIORITY & FREQUENCY OF USE | A4 LANDSCAPE FORMAT
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
