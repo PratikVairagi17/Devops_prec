@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .docker-logo {
+            font-size: 1.2em;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            gap: 10px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        nav button {
+            padding: 10px 20px;
+            border: none;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border: 2px solid #e9ecef;
+        }
+
+        nav button:hover, nav button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .card {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .benefit {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9em;
+        }
+
+        .command-box {
+            background: #1e3c72;
+            color: #4ade80;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            border: 2px solid #667eea;
+        }
+
+        .command-box code {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .architecture-diagram {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .flow-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            font-size: 2em;
+            color: #667eea;
+            top: 20%;
+        }
+
+        .flow-step:last-child::after {
+            content: '';
+        }
+
+        .comparison-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .item-box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 3px solid #667eea;
+        }
+
+        .item-box h4 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .item-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .example-container {
+            background: #f8f9ff;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .qa-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .qa-question {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qa-answer {
+            padding: 20px;
+            display: none;
+            background: #f8f9ff;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .qa-box.open .qa-answer {
+            display: block;
+        }
+
+        .qa-box.open .qa-question {
+            background: #764ba2;
+        }
+
+        .icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+
+        .list-item {
+            margin: 15px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+            
+            nav {
+                flex-direction: column;
+            }
+            
+            nav button {
+                width: 100%;
+            }
+            
+            .comparison-item {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-step::after {
+                content: '↓';
+                right: auto;
+                top: auto;
+                bottom: -15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="docker-logo">🐳</span>Docker Complete Guide</h1>
+            <p>From Beginner to Advanced - Interactive Learning</p>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" data-section="what-is">What is Docker?</button>
+            <button class="nav-btn" data-section="why-docker">Why Docker?</button>
+            <button class="nav-btn" data-section="how-works">How it Works</button>
+            <button class="nav-btn" data-section="components">Components</button>
+            <button class="nav-btn" data-section="commands">Commands</button>
+            <button class="nav-btn" data-section="example">Practical Example</button>
+            <button class="nav-btn" data-section="interview">Interview Q&A</button>
+        </nav>
+
+        <!-- Section 1: What is Docker -->
+        <div class="content active" id="what-is">
+            <h2 class="section-title">🐳 What is Docker?</h2>
+            
+            <div class="card">
+                <h3><span class="icon">📌</span>Simple Definition</h3>
+                <p>Docker is a <strong>containerization platform</strong> that packages your application + all its dependencies (libraries, OS packages) into a <strong>lightweight container</strong> that runs the same way on every machine.</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 30px; margin-bottom: 15px;">Docker vs Virtual Machines - Detailed Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Virtual Machine (VM)</th>
+                        <th>Docker Container</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Size</strong></td>
+                        <td>Several GBs</td>
+                        <td>Few MBs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Boot Time</strong></td>
+                        <td>2-5 minutes</td>
+                        <td>Seconds (< 1s)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operating System</strong></td>
+                        <td>Full OS included</td>
+                        <td>Shares Host OS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resource Usage</strong></td>
+                        <td>High CPU & RAM</td>
+                        <td>Minimal resources</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>Slower (more overhead)</td>
+                        <td>Very Fast (native speed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Isolation</strong></td>
+                        <td>Complete</td>
+                        <td>Process-level</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portability</strong></td>
+                        <td>Medium</td>
+                        <td>Excellent (works everywhere)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="architecture-diagram">
+                <h4>Traditional VM vs Docker Architecture</h4>
+                <div class="comparison-item">
+                    <div class="item-box">
+                        <h4>Virtual Machine Approach</h4>
+                        <p><strong>Host OS</strong></p>
+                        <p>↓</p>
+                        <p><strong>Hypervisor</strong> (VMware, VirtualBox)</p>
+                        <p>↓</p>
+                        <p><strong>Guest OS</strong> (Linux, Windows)</p>
+                        <p>↓</p>
+                        <p><strong>Applications</strong></p>
+                        <p style="color: #999; margin-top: 10px; font-size: 0.9em;">Heavy, slow to start</p>
+                    </div>
+                    <div class="item-box">
+                        <h4>Docker Container Approach</h4>
+                        <p><strong>Host OS</strong></p>
+                        <p>↓</p>
+                        <p><strong>Docker Engine</strong></p>
+                        <p>↓</p>
+                        <p><strong>Container</strong> (App + Libraries)</p>
+                        <p style="margin-top: 10px;">Multiple containers share OS</p>
+                        <p style="color: #999; font-size: 0.9em;">Lightweight, fast to start</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Why Docker -->
+        <div class="content" id="why-docker">
+            <h2 class="section-title">⭐ Why Docker is Used</h2>
+            
+            <div class="card">
+                <h3><span class="icon">✅</span>1. No "It Works on My Machine" Issues</h3>
+                <p>Your application runs the same in development, testing, and production environments. Everyone uses the same container, so no surprises!</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">✅</span>2. Lightweight & Fast</h3>
+                <p>Containers use 10x fewer resources than VMs. You can run 50 containers on the same machine where you'd run 2-3 VMs.</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">✅</span>3. Microservices Support</h3>
+                <p>Each service (database, API, frontend) runs independently in its own container. Services don't interfere with each other.</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">✅</span>4. Easy CI/CD Integration</h3>
+                <p>Automate the entire pipeline: Code → Build → Test → Deploy. Everything runs in containers for consistency.</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">✅</span>5. Highly Scalable</h3>
+                <p>Deploy to Kubernetes, AWS ECS, Azure AKS, GCP GKE. Scale from 1 to 1000s of containers automatically.</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 30px; margin-bottom: 15px;">Real-World Benefits</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div class="item-box">
+                    <h4>💰 Cost Reduction</h4>
+                    <p>Run more apps on same hardware. Less cloud resources needed.</p>
+                </div>
+                <div class="item-box">
+                    <h4>⚡ Faster Deployment</h4>
+                    <p>Deploy new features in seconds, not hours.</p>
+                </div>
+                <div class="item-box">
+                    <h4>🔧 Easy Maintenance</h4>
+                    <p>Update one container, not 100 servers.</p>
+                </div>
+                <div class="item-box">
+                    <h4>👥 Team Collaboration</h4>
+                    <p>Developers and DevOps use same environment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: How Works -->
+        <div class="content" id="how-works">
+            <h2 class="section-title">🔧 How Docker Works</h2>
+            
+            <div class="highlight">
+                <strong>Key Concept:</strong> Docker uses <strong>Images</strong> and <strong>Containers</strong>
+            </div>
+
+            <div class="comparison-item">
+                <div class="item-box">
+                    <h4>📋 Docker Image</h4>
+                    <p><strong>What it is:</strong> A blueprint/template</p>
+                    <p><strong>Contains:</strong> Application code + dependencies + OS libraries</p>
+                    <p><strong>Status:</strong> Static (read-only)</p>
+                    <p><strong>Analogy:</strong> Like a class in programming</p>
+                    <p><strong>Size:</strong> Small (MBs)</p>
+                    <p><strong>Reusable:</strong> Create 100 containers from 1 image</p>
+                </div>
+                <div class="item-box">
+                    <h4>📦 Docker Container</h4>
+                    <p><strong>What it is:</strong> Running instance of image</p>
+                    <p><strong>Contains:</strong> Image + file system + network + processes</p>
+                    <p><strong>Status:</strong> Dynamic (running/stopped)</p>
+                    <p><strong>Analogy:</strong> Like an object instance</p>
+                    <p><strong>Size:</strong> Larger during execution</p>
+                    <p><strong>Temporary:</strong> Can be created/deleted easily</p>
+                </div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 30px; margin-bottom: 15px;">Docker Workflow - Step by Step</h3>
+            <div class="flow-container">
+                <div class="flow-step">1. Write Dockerfile</div>
+                <div class="flow-step">2. Build Image</div>
+                <div class="flow-step">3. Push to Registry</div>
+                <div class="flow-step">4. Run Container</div>
+                <div class="flow-step">5. Monitor & Scale</div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 30px; margin-bottom: 15px;">Detailed Process Explanation</h3>
+            
+            <div class="card">
+                <h3>Step 1️⃣: Write Dockerfile</h3>
+                <p>Create a file that defines how to build the image:</p>
+                <div class="command-box"><code>FROM ubuntu:20.04
+RUN apt-get install python3
+COPY app.py /
+CMD ["python3", "app.py"]</code></div>
+            </div>
+
+            <div class="card">
+                <h3>Step 2️⃣: Build Image</h3>
+                <p>Docker reads Dockerfile and creates an image:</p>
+                <div class="command-box"><code>docker build -t myapp:v1 .</code></div>
+                <p>Result: Image stored locally (~100MB)</p>
+            </div>
+
+            <div class="card">
+                <h3>Step 3️⃣: Push to Registry (Optional)</h3>
+                <p>Share image on DockerHub or private registry:</p>
+                <div class="command-box"><code>docker push username/myapp:v1</code></div>
+            </div>
+
+            <div class="card">
+                <h3>Step 4️⃣: Run Container</h3>
+                <p>Create a running instance from image:</p>
+                <div class="command-box"><code>docker run -d -p 8080:5000 myapp:v1</code></div>
+                <p>Your app is now running!</p>
+            </div>
+
+            <div class="card">
+                <h3>Step 5️⃣: Monitor & Scale</h3>
+                <p>Check logs, monitor performance, run multiple containers:</p>
+                <div class="command-box"><code>docker logs container_id
+docker stats container_id
+docker run -d myapp:v1  # Run another instance</code></div>
+            </div>
+        </div>
+
+        <!-- Section 4: Components -->
+        <div class="content" id="components">
+            <h2 class="section-title">⚙️ Important Docker Components</h2>
+            
+            <div class="card">
+                <h3><span class="icon">🔹</span>Docker Engine</h3>
+                <p><strong>What:</strong> Core service that runs on your machine</p>
+                <p><strong>Job:</strong> Creates, runs, and manages containers</p>
+                <p><strong>Components:</strong> Server (daemon), REST API, CLI</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔹</span>Dockerfile</h3>
+                <p><strong>What:</strong> A text file with instructions</p>
+                <p><strong>Job:</strong> Defines how to build a Docker image</p>
+                <p><strong>Format:</strong> Plain text with specific commands</p>
+                <p><strong>Example:</strong></p>
+                <div class="command-box"><code>FROM python:3.10          # Base image
+WORKDIR /app               # Working directory
+COPY requirements.txt .    # Copy files
+RUN pip install -r requirements.txt  # Install dependencies
+COPY app.py .              # Copy application
+CMD ["python", "app.py"]   # Run command</code></div>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔹</span>Docker Image</h3>
+                <p><strong>What:</strong> Snapshot of application state</p>
+                <p><strong>Key Feature:</strong> Immutable (read-only)</p>
+                <p><strong>Size:</strong> Typically 100MB - 1GB</p>
+                <p><strong>Usage:</strong> Template for creating containers</p>
+                <p><strong>Storage:</strong> Stored locally or in registry</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔹</span>Docker Container</h3>
+                <p><strong>What:</strong> Running process from image</p>
+                <p><strong>Key Feature:</strong> Isolated environment</p>
+                <p><strong>Lifecycle:</strong> Can be started, stopped, paused, restarted</p>
+                <p><strong>Resources:</strong> CPU, memory, network isolated</p>
+                <p><strong>Persistence:</strong> Can be temporary or permanent (with volumes)</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔹</span>DockerHub</h3>
+                <p><strong>What:</strong> Official registry for Docker images</p>
+                <p><strong>Like:</strong> GitHub for Docker images</p>
+                <p><strong>Contains:</strong> Official images (nginx, python, node, etc.)</p>
+                <p><strong>Features:</strong> Free public repos, private repos (paid)</p>
+                <p><strong>URL:</strong> hub.docker.com</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔹</span>Docker Registry</h3>
+                <p><strong>What:</strong> Server that stores Docker images</p>
+                <p><strong>Types:</strong> Public (DockerHub), Private (self-hosted), Cloud (AWS ECR, GCP GCR)</p>
+                <p><strong>Use Case:</strong> Store proprietary images securely</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🔹</span>Docker Compose</h3>
+                <p><strong>What:</strong> Tool to run multiple containers together</p>
+                <p><strong>File:</strong> docker-compose.yml</p>
+                <p><strong>Use Case:</strong> Multi-service apps (database + API + frontend)</p>
+                <p><strong>Benefit:</strong> Define entire stack in one file</p>
+                <p><strong>Example:</strong></p>
+                <div class="command-box"><code>version: '3'
+services:
+  db:
+    image: postgres:13
+  api:
+    image: myapp:v1
+  frontend:
+    image: nginx:latest</code></div>
+            </div>
+        </div>
+
+        <!-- Section 5: Commands -->
+        <div class="content" id="commands">
+            <h2 class="section-title">💻 Docker Commands Explained</h2>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">📌 Diagnostic Commands</h3>
+            
+            <div class="card">
+                <h3>Check Docker Version</h3>
+                <div class="command-box"><code>docker --version</code></div>
+                <p><strong>Output:</strong> Docker version 24.0.0</p>
+            </div>
+
+            <div class="card">
+                <h3>List Running Containers</h3>
+                <div class="command-box"><code>docker ps</code></div>
+                <p><strong>Shows:</strong> Only currently running containers</p>
+                <p><strong>Columns:</strong> Container ID, Image, Command, Status, Ports, Names</p>
+            </div>
+
+            <div class="card">
+                <h3>List All Containers (Including Stopped)</h3>
+                <div class="command-box"><code>docker ps -a</code></div>
+                <p><strong>Shows:</strong> All containers (running + stopped)</p>
+            </div>
+
+            <div class="card">
+                <h3>List All Images</h3>
+                <div class="command-box"><code>docker images</code></div>
+                <p><strong>Shows:</strong> All images on your machine</p>
+                <p><strong>Columns:</strong> Repository, Tag, Image ID, Size</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">🖼️ Image Commands</h3>
+
+            <div class="card">
+                <h3>Pull Image from DockerHub</h3>
+                <div class="command-box"><code>docker pull nginx
+docker pull ubuntu:20.04
+docker pull python:3.10-slim</code></div>
+                <p><strong>Purpose:</strong> Download pre-built images</p>
+                <p><strong>Default:</strong> Pulls latest tag if not specified</p>
+            </div>
+
+            <div class="card">
+                <h3>Remove Image</h3>
+                <div class="command-box"><code>docker rmi nginx
+docker rmi image_id</code></div>
+                <p><strong>Note:</strong> Can't remove image if containers using it exist</p>
+            </div>
+
+            <div class="card">
+                <h3>Inspect Image</h3>
+                <div class="command-box"><code>docker inspect nginx:latest</code></div>
+                <p><strong>Shows:</strong> Detailed info about image layers, environment, ports, etc.</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">📦 Container Commands</h3>
+
+            <div class="card">
+                <h3>Run a Container (Basic)</h3>
+                <div class="command-box"><code>docker run nginx</code></div>
+                <p><strong>Does:</strong> Creates and starts container, prints output to terminal</p>
+            </div>
+
+            <div class="card">
+                <h3>Run Container in Background + Expose Port</h3>
+                <div class="command-box"><code>docker run -d -p 8080:80 nginx</code></div>
+                <p><strong>-d:</strong> Run in detached mode (background)</p>
+                <p><strong>-p 8080:80:</strong> Map port 8080 (host) → 80 (container)</p>
+                <p><strong>Result:</strong> Access at http://localhost:8080</p>
+            </div>
+
+            <div class="card">
+                <h3>Run Container with Name + Environment Variables</h3>
+                <div class="command-box"><code>docker run -d --name my-app -e DB_HOST=localhost myapp:v1</code></div>
+                <p><strong>--name:</strong> Give container a friendly name</p>
+                <p><strong>-e:</strong> Pass environment variables</p>
+            </div>
+
+            <div class="card">
+                <h3>Stop a Container</h3>
+                <div class="command-box"><code>docker stop container_id
+docker stop container_name</code></div>
+                <p><strong>Graceful:</strong> Gives container time to shut down (10s timeout)</p>
+                <p><strong>Status:</strong> Container stops but data preserved</p>
+            </div>
+
+            <div class="card">
+                <h3>Kill a Container (Force Stop)</h3>
+                <div class="command-box"><code>docker kill container_id</code></div>
+                <p><strong>Force:</strong> Immediately terminates container</p>
+                <p><strong>Use when:</strong> Container won't respond to stop</p>
+            </div>
+
+            <div class="card">
+                <h3>Remove a Container</h3>
+                <div class="command-box"><code>docker rm container_id
+docker rm -f container_id  # Force remove</code></div>
+                <p><strong>Purpose:</strong> Delete stopped container</p>
+                <p><strong>-f:</strong> Force remove (even if running)</p>
+            </div>
+
+            <div class="card">
+                <h3>View Container Logs</h3>
+                <div class="command-box"><code>docker logs container_id
+docker logs -f container_id  # Follow logs (tail -f)</code></div>
+                <p><strong>Shows:</strong> All output from application</p>
+                <p><strong>-f:</strong> Stream logs in real-time</p>
+            </div>
+
+            <div class="card">
+                <h3>Execute Command Inside Container</h3>
+                <div class="command-box"><code>docker exec -it container_id bash
+docker exec -it container_id sh</code></div>
+                <p><strong>Purpose:</strong> Run commands inside running container</p>
+                <p><strong>-it:</strong> Interactive terminal</p>
+                <p><strong>Use Case:</strong> Debug, inspect files, run scripts</p>
+            </div>
+
+            <div class="card">
+                <h3>View Container Resource Usage</h3>
+                <div class="command-box"><code>docker stats container_id
+docker stats  # All containers</code></div>
+                <p><strong>Shows:</strong> Real-time CPU, memory, network usage</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">🔨 Build Commands</h3>
+
+            <div class="card">
+                <h3>Build Image from Dockerfile</h3>
+                <div class="command-box"><code>docker build -t myapp:v1 .
+docker build -t myapp:v1 -f Dockerfile .</code></div>
+                <p><strong>-t:</strong> Tag name (repository:version)</p>
+                <p><strong>.</strong> (dot): Build context (current directory)</p>
+                <p><strong>-f:</strong> Specify Dockerfile path (optional)</p>
+            </div>
+
+            <div class="card">
+                <h3>Run Built Image</h3>
+                <div class="command-box"><code>docker run -d -p 5000:5000 myapp:v1</code></div>
+                <p><strong>Purpose:</strong> Create container from your custom image</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">🌐 Registry Commands</h3>
+
+            <div class="card">
+                <h3>Login to DockerHub</h3>
+                <div class="command-box"><code>docker login</code></div>
+                <p><strong>Prompts:</strong> Username and password</p>
+                <p><strong>Stores:</strong> Credentials locally</p>
+            </div>
+
+            <div class="card">
+                <h3>Tag Image for Push</h3>
+                <div class="command-box"><code>docker tag myapp:v1 username/myapp:v1</code></div>
+                <p><strong>Format:</strong> registry/username/repository:tag</p>
+                <p><strong>Purpose:</strong> Prepare image for pushing to registry</p>
+            </div>
+
+            <div class="card">
+                <h3>Push Image to Registry</h3>
+                <div class="command-box"><code>docker push username/myapp:v1</code></div>
+                <p><strong>Result:</strong> Image available publicly on DockerHub</p>
+                <p><strong>Others can now run:</strong> docker pull username/myapp:v1</p>
+            </div>
+
+            <div class="card">
+                <h3>Pull and Run Someone's Image</h3>
+                <div class="command-box"><code>docker run -d username/myapp:v1</code></div>
+                <p><strong>Automatic:</strong> Pulls if not available locally</p>
+            </div>
+        </div>
+
+        <!-- Section 6: Practical Example -->
+        <div class="content" id="example">
+            <h2 class="section-title">💡 Practical Example: Python App</h2>
+
+            <div class="highlight">
+                <strong>Project:</strong> Create a simple Python web app and containerize it
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 1: Create Python Application</h3>
+            
+            <div class="example-container">
+                <div class="example-title">📄 app.py</div>
+                <div class="command-box"><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello from Docker! 🐳'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)</code></div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 2: Create Requirements File</h3>
+            
+            <div class="example-container">
+                <div class="example-title">📄 requirements.txt</div>
+                <div class="command-box"><code>Flask==2.3.0
+Werkzeug==2.3.0</code></div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 3: Create Dockerfile</h3>
+            
+            <div class="example-container">
+                <div class="example-title">📄 Dockerfile (Detailed Explanation)</div>
+                <div class="command-box"><code># Line 1: Start from official Python image
+FROM python:3.10-slim
+# Explanation: Uses lightweight Python 3.10 image (~150MB)
+
+# Line 2: Set working directory inside container
+WORKDIR /app
+# Explanation: All commands run in /app directory
+
+# Line 3: Copy requirements
+COPY requirements.txt .
+# Explanation: Copy from host to container
+
+# Line 4: Install dependencies
+RUN pip install -r requirements.txt
+# Explanation: Runs during build, installs Flask
+
+# Line 5: Copy application code
+COPY app.py .
+# Explanation: Copy Python app to container
+
+# Line 6: Expose port
+EXPOSE 5000
+# Explanation: Documents that app uses port 5000
+
+# Line 7: Run application
+CMD ["python", "app.py"]
+# Explanation: Command to run when container starts</code></div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 4: Build Docker Image</h3>
+            
+            <div class="example-container">
+                <div class="example-title">🔨 Build Command</div>
+                <div class="command-box"><code>docker build -t flask-app:v1 .</code></div>
+                <p><strong>Output:</strong></p>
+                <div class="command-box"><code>Sending build context to Docker daemon...
+Step 1/7 : FROM python:3.10-slim
+Step 2/7 : WORKDIR /app
+Step 3/7 : COPY requirements.txt .
+Step 4/7 : RUN pip install -r requirements.txt
+Step 5/7 : COPY app.py .
+Step 6/7 : EXPOSE 5000
+Step 7/7 : CMD ["python", "app.py"]
+Successfully built abc123xyz
+Successfully tagged flask-app:v1</code></div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 5: Run Container</h3>
+            
+            <div class="example-container">
+                <div class="example-title">▶️ Run Command</div>
+                <div class="command-box"><code>docker run -d -p 5000:5000 --name my-flask-app flask-app:v1</code></div>
+                <p><strong>Breakdown:</strong></p>
+                <div style="margin-top: 15px;">
+                    <p class="list-item"><strong>-d</strong> = Run in detached mode (background)</p>
+                    <p class="list-item"><strong>-p 5000:5000</strong> = Map host port 5000 to container port 5000</p>
+                    <p class="list-item"><strong>--name my-flask-app</strong> = Give container friendly name</p>
+                    <p class="list-item"><strong>flask-app:v1</strong> = Image to run</p>
+                </div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 6: Verify Container is Running</h3>
+            
+            <div class="example-container">
+                <div class="example-title">✅ Check Container Status</div>
+                <div class="command-box"><code>docker ps</code></div>
+                <p><strong>Output shows:</strong> Container running on port 5000</p>
+                <p><strong>Access app:</strong> Open browser → http://localhost:5000</p>
+                <p><strong>Expected Output:</strong> "Hello from Docker! 🐳"</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 7: View Logs</h3>
+            
+            <div class="example-container">
+                <div class="example-title">📋 Monitor Container</div>
+                <div class="command-box"><code>docker logs my-flask-app</code></div>
+                <p><strong>Shows:</strong> Application startup messages</p>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Step 8: Stop & Remove Container</h3>
+            
+            <div class="example-container">
+                <div class="example-title">⏹️ Clean Up</div>
+                <div class="command-box"><code>docker stop my-flask-app
+docker rm my-flask-app</code></div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Complete Project Structure</h3>
+            
+            <div class="card">
+                <div class="command-box"><code>project-folder/
+├── app.py                 # Python application
+├── requirements.txt       # Dependencies
+├── Dockerfile            # Container instructions
+└── docker-compose.yml    # (Optional) Multi-container setup</code></div>
+            </div>
+
+            <h3 style="color: #1e3c72; margin-top: 20px; margin-bottom: 15px;">Bonus: Multi-Stage Build (Optimize Image Size)</h3>
+            
+            <div class="card">
+                <h3>Build Stage + Runtime Stage</h3>
+                <div class="command-box"><code"># Stage 1: Builder
+FROM python:3.10-slim as builder
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --user -r requirements.txt
+
+# Stage 2: Runtime (smaller)
+FROM python:3.10-slim
+WORKDIR /app
+COPY --from=builder /root/.local /root/.local
+COPY app.py .
+ENV PATH=/root/.local/bin:$PATH
+CMD ["python", "app.py"]</code></div>
+                <p><strong>Benefit:</strong> Build files (~200MB) are discarded, only runtime stays (~150MB)</p>
+            </div>
+        </div>
+
+        <!-- Section 7: Interview Q&A -->
+        <div class="content" id="interview">
+            <h2 class="section-title">🎤 Interview Questions & Answers</h2>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q1. What is Docker?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>A:</strong> Docker is a containerization platform that packages applications with all their dependencies (libraries, OS packages, runtime) into lightweight, portable containers. These containers can run consistently across any machine—development, testing, or production.
+                    <br><br>
+                    <strong>Key Point:</strong> "Build once, run anywhere"
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q2. What is the difference between VM and Docker?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Virtual Machines:</strong>
+                    <p class="list-item">Include full OS (several GBs)</p>
+                    <p class="list-item">Boot in minutes</p>
+                    <p class="list-item">Heavy resource usage</p>
+                    <p class="list-item">Complete isolation</p>
+                    
+                    <strong style="margin-top: 15px;">Docker Containers:</strong>
+                    <p class="list-item">Share host OS (MBs in size)</p>
+                    <p class="list-item">Start in seconds</p>
+                    <p class="list-item">Minimal resource usage</p>
+                    <p class="list-item">Process-level isolation</p>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q3. What is a Docker Image vs Container?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Docker Image:</strong> Blueprint/template (like a class in OOP)
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Read-only, immutable</li>
+                        <li>Contains app + dependencies</li>
+                        <li>Stored as file</li>
+                        <li>Size: Small (MBs)</li>
+                    </ul>
+                    
+                    <strong style="margin-top: 15px;">Docker Container:</strong> Running instance of image (like an object instance)
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Running, dynamic</li>
+                        <li>Has file system, processes, network</li>
+                        <li>Can be started/stopped/paused</li>
+                        <li>Can be temporary or persistent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q4. What is a Dockerfile?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Dockerfile:</strong> A text file with instructions to build a Docker image.
+                    <br><br>
+                    <strong>Common Commands:</strong>
+                    <div class="command-box" style="margin-top: 10px;"><code>FROM          # Base image
+WORKDIR       # Working directory
+COPY          # Copy files
+RUN           # Execute commands during build
+ENV           # Set environment variables
+EXPOSE        # Document ports
+CMD           # Default command to run
+ENTRYPOINT    # Entry point command</code></div>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q5. What is docker-compose?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>docker-compose:</strong> Tool to define and run multiple Docker containers as a single application.
+                    <br><br>
+                    <strong>Use Case:</strong> Run database + API + frontend together
+                    <div class="command-box" style="margin-top: 10px;"><code>version: '3'
+services:
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+  api:
+    image: myapi:v1
+    ports:
+      - "5000:5000"
+  frontend:
+    image: mynginx:v1
+    ports:
+      - "80:80"</code></div>
+                    <strong style="margin-top: 10px;">Command:</strong> docker-compose up
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q6. What is DockerHub?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>DockerHub:</strong> Official registry/repository for Docker images (like GitHub for code).
+                    <br><br>
+                    <strong>Features:</strong>
+                    <p class="list-item">Contains official images (nginx, python, ubuntu, etc.)</p>
+                    <p class="list-item">Free public repositories</p>
+                    <p class="list-item">Private repositories (paid)</p>
+                    <p class="list-item">Automated builds from GitHub</p>
+                    <p class="list-item">Version control for images</p>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q7. Explain port mapping.</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Port Mapping:</strong> Connects a port on your host machine to a port inside the container.
+                    <div class="command-box" style="margin-top: 10px;"><code>docker run -p HOST_PORT:CONTAINER_PORT image</code></div>
+                    
+                    <strong style="margin-top: 15px;">Example:</strong>
+                    <div class="command-box" style="margin-top: 10px;"><code>docker run -p 8080:80 nginx</code></div>
+                    
+                    <strong style="margin-top: 15px;">Breakdown:</strong>
+                    <p class="list-item">8080 = Port on your computer</p>
+                    <p class="list-item">80 = Port inside container</p>
+                    <p class="list-item">Access app at: http://localhost:8080</p>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q8. How do you troubleshoot containers?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Troubleshooting Techniques:</strong>
+                    
+                    <div class="command-box" style="margin-top: 10px;"><code>docker logs container_id        # View application output
+docker logs -f container_id     # Follow logs in real-time
+docker exec -it container_id bash  # Enter container shell
+docker inspect container_id     # View detailed config
+docker stats container_id       # Check resource usage
+docker ps -a                    # See all containers + status</code></div>
+                    
+                    <strong style="margin-top: 15px;">Common Issues:</strong>
+                    <p class="list-item"><strong>Port already in use:</strong> Change -p mapping</p>
+                    <p class="list-item"><strong>Container exits immediately:</strong> Check logs</p>
+                    <p class="list-item"><strong>Can't connect:</strong> Verify port mapping with docker ps</p>
+                    <p class="list-item"><strong>Disk space issues:</strong> docker system prune</p>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q9. How to reduce Docker image size?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Optimization Techniques:</strong>
+                    
+                    <p class="list-item"><strong>Use slim base images:</strong> python:3.10-slim instead of python:3.10</p>
+                    <p class="list-item"><strong>Multi-stage builds:</strong> Separate build and runtime stages</p>
+                    <p class="list-item"><strong>Remove cache:</strong> --no-cache in RUN commands</p>
+                    <p class="list-item"><strong>Combine RUN commands:</strong> Use && to chain commands</p>
+                    <p class="list-item"><strong>Remove unnecessary files:</strong> Clean package manager cache</p>
+                    
+                    <strong style="margin-top: 15px;">Example:</strong>
+                    <div class="command-box" style="margin-top: 10px;"><code">FROM python:3.10-slim
+RUN apt-get update && apt-get install -y curl \
+    && rm -rf /var/lib/apt/lists/*</code></div>
+                    
+                    <strong style="margin-top: 10px;">Size Reduction: ~500MB → ~200MB</strong>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="qa-question">
+                    <span>Q10. What is multi-stage build?</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-answer">
+                    <strong>Multi-Stage Build:</strong> Technique to create smaller images by using multiple FROM statements.
+                    
+                    <strong style="margin-top: 15px;">Why:</strong> Build stage (compiler, dependencies) is discarded, only runtime remains.
+                    
+                    <div class="command-box" style="margin-top: 10px;"><code"># Stage 1: Builder (build dependencies)
+FROM ubuntu:20.04 as builder
+COPY requirements.txt .
+RUN apt-get install dependencies
+
+# Stage 2: Runtime (only necessary files)
+FROM ubuntu:20.04
+COPY --from=builder /path /path
+CMD ["python", "app.py"]</code></div>
+                    
+                    <strong style="margin-top: 10px;">Benefit:</strong> Final image only ~100MB instead of ~500MB
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🐳 Docker Complete Guide - Interactive Learning Platform</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Ready to containerize your applications? Start building! 🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.dataset.section;
+                
+                // Remove active from all buttons
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Hide all content
+                document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+                
+                // Show selected content
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Q&A expandable functionality
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const qaBox = this.parentElement;
+                qaBox.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>
