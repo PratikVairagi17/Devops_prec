@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+    restart: unless-stopped
+    # Optional: limit resources on dev machines
+    # deploy:
+    #  resources:
+    #    limits:
+    #      cpus: '0.50'
+    #      memory: 512M
